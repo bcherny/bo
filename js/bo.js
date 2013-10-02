@@ -5,6 +5,8 @@ define(function(require, exports, module) {
   return Bo = (function() {
     Bo.prototype.panes = {};
 
+    Bo.prototype.state = {};
+
     function Bo() {
       var element, pane, panes, _i, _len;
       panes = document.querySelectorAll('[data-bo-pane]');
@@ -18,6 +20,14 @@ define(function(require, exports, module) {
       this.showFirst();
     }
 
+    Bo.prototype.get = function(key) {
+      return this.state[key];
+    };
+
+    Bo.prototype.set = function(key, value) {
+      return this.state[key] = value;
+    };
+
     Bo.prototype.hideAll = function() {
       var id, pane, _ref, _results;
       _ref = this.panes;
@@ -30,12 +40,10 @@ define(function(require, exports, module) {
     };
 
     Bo.prototype.showFirst = function() {
-      var id, pane, _ref, _results;
-      _ref = this.panes;
+      var id, _results;
       _results = [];
-      for (id in _ref) {
-        pane = _ref[id];
-        pane.show();
+      for (id in this.panes) {
+        this.show(id);
         break;
       }
       return _results;
@@ -43,7 +51,8 @@ define(function(require, exports, module) {
 
     Bo.prototype.show = function(id) {
       this.hideAll();
-      return this.panes[id].show();
+      this.panes[id].show();
+      return this.set('active', id);
     };
 
     return Bo;

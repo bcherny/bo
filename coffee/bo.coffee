@@ -5,6 +5,7 @@ define (require, exports, module) ->
 	class Bo
 
 		panes: {}
+		state: {}
 
 		constructor: ->
 
@@ -20,6 +21,14 @@ define (require, exports, module) ->
 			# show first pane
 			@showFirst()
 
+		get: (key) ->
+
+			@state[key]
+
+		set: (key, value) ->
+
+			@state[key] = value
+
 		hideAll: ->
 
 			for id, pane of @panes
@@ -27,8 +36,8 @@ define (require, exports, module) ->
 
 		showFirst: ->
 
-			for id, pane of @panes
-				pane.show()
+			for id of @panes
+				@show id
 				break
 
 		show: (id) ->
@@ -38,3 +47,6 @@ define (require, exports, module) ->
 
 			# show this pane
 			@panes[id].show()
+
+			# register it
+			@set 'active', id
