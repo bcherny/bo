@@ -1,28 +1,40 @@
 define (require, exports, module) ->
-	
+
+	Pane = require 'bo.pane'
+
 	class Bo
+
+		panes: {}
 
 		constructor: ->
 
 			# load panes from DOM
-			@panes = document.querySelectorAll '[data-bo-pane]'
+			panes = document.querySelectorAll '[data-bo-pane]'
+
+			# init panes
+			for element in panes
+				pane = new Pane
+					element: element
+				@panes[pane.id] = pane
 
 			# show first pane
-			@show @panes[0]
+			@showFirst()
 
 		hideAll: ->
 
-			for pane in @panes
-				pane.classList.remove 'active'
+			for id, pane of @panes
+				pane.hide()
 
-		show: (paneElement) ->
+		showFirst: ->
 
-			# sanity check
-			if !paneElement
-				console.error 'Bo.show expects an Element, but passed ', paneElement
+			for id, pane of @panes
+				pane.show()
+				break
+
+		show: (id) ->
 
 			# hide panes
 			@hideAll()
 
 			# show this pane
-			paneElement.classList.add 'active'
+			@panes[id].show()
