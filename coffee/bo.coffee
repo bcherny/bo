@@ -1,10 +1,11 @@
 define (require, exports, module) ->
 
 	Model = require 'bo.model'
+	View = require 'bo.view'
 	Pane = require 'bo.pane'
 	_ = require 'bo.util'
 
-	class Bo
+	class Bo extends View
 
 		options:
 
@@ -17,9 +18,8 @@ define (require, exports, module) ->
 			'click': 'click'
 
 		panes: {}
-		state: new Model
 
-		constructor: ->
+		initialize: ->
 
 			# load panes from DOM
 			panes = document.querySelectorAll '[' + @options.paneAttribute + ']'
@@ -32,13 +32,6 @@ define (require, exports, module) ->
 
 			# show first pane
 			@show _.one @panes
-
-			# events
-			_.each @events, @attachEvent
-
-		attachEvent: (fn, type) =>
-
-			document.addEventListener type, @[fn]
 
 		# {String|Number|DOMElement} element
 		registerPane: (element) =>
@@ -57,14 +50,14 @@ define (require, exports, module) ->
 
 		hideAll: ->
 
-			_.each @panes, (n, pane) ->
+			_.each @panes, (id, pane) ->
 				pane.right true
 
 		show: (id) ->
 
 			# hide active pane
 			newPane = @panes[id]
-			oldPane = @state.get 'active'
+			oldPane = @get 'active'
 
 			if oldPane
 
@@ -85,7 +78,7 @@ define (require, exports, module) ->
 				newPane.show true
 
 			# register it
-			@state.set 'active', newPane
+			@set 'active', newPane
 
 		click: (event) =>
 

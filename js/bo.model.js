@@ -11,7 +11,19 @@ define(function(require, exports, module) {
     };
 
     Model.prototype.set = function(key, value) {
+      console.log('set', key, value);
       return this.data[key] = value;
+    };
+
+    Model.prototype.push = function(key, value, index) {
+      var array;
+      console.log('push', key, value, index);
+      array = this.data[key] || (this.data[key] = {});
+      if (index) {
+        return array[index] = value;
+      } else {
+        return array.push(value);
+      }
     };
 
     return Model;
