@@ -2,8 +2,9 @@
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 define(function(require, exports, module) {
-  var Bo, makeId, makePane, paneIdCounter;
+  var Bo, makeId, makePane, paneIdCounter, _;
   Bo = require('bo');
+  _ = require('bo.util');
   paneIdCounter = 0;
   makePane = function(id) {
     var element;
@@ -12,8 +13,8 @@ define(function(require, exports, module) {
     document.body.appendChild(element);
     return element;
   };
-  makeId = function() {
-    return 'pane' + (++paneIdCounter);
+  makeId = function(counter) {
+    return 'pane' + counter;
   };
   return Bo.Pane = (function() {
     Pane.prototype.id = null;
@@ -24,11 +25,13 @@ define(function(require, exports, module) {
       var element, html, idAttr;
       this.options = options;
       this.clearAnimation = __bind(this.clearAnimation, this);
+      ++paneIdCounter;
       element = this.options.element;
       html = this.options.html;
       idAttr = element ? element.getAttribute('data-bo-pane') : void 0;
-      this.id = this.options.id || idAttr || makeId();
+      this.id = this.options.id || idAttr || makeId(paneIdCounter);
       this.element = element || makePane(this.id);
+      this.index = this.options.index || paneIdCounter;
       this.element.setAttribute('data-bo-pane', this.id);
       if (html) {
         this.element.innerHTML = html;
@@ -39,29 +42,30 @@ define(function(require, exports, module) {
       return this.element.classList.remove('animate');
     };
 
-    Pane.prototype.left = function() {
-      console.log('left', this.element);
-      this.element.classList.add('animate');
-      this.element.classList.remove('right');
-      this.element.classList.add('left');
-      return setTimeout(this.clearAnimation, this.options.animationDuration);
+    Pane.prototype.animate = function(instant) {
+      if (!instant) {
+        this.element.classList.add('animate');
+        return setTimeout(this.clearAnimation, this.options.animationDuration);
+      }
     };
 
-    Pane.prototype.right = function() {
-      console.log('right', this.element, this.options.animationDuration);
-      this.element.classList.add('animate');
-      this.element.classList.remove('left');
-      this.element.classList.add('right');
-      return setTimeout(this.clearAnimation, this.options.animationDuration);
-    };
-
-    Pane.prototype.show = function() {
-      console.log('show', this.element);
-      this.element.classList.add('animate');
-      this.element.classList.remove('left');
+    Pane.prototype.left = _.fluent(function(instant) {
+      this.animate(instant);
       this.element.classList.remove('right');
-      return setTimeout(this.clearAnimation, this.options.animationDuration);
-    };
+      return this.element.classList.add('left');
+    });
+
+    Pane.prototype.right = _.fluent(function(instant) {
+      this.animate(instant);
+      this.element.classList.remove('left');
+      return this.element.classList.add('right');
+    });
+
+    Pane.prototype.show = _.fluent(function(instant) {
+      this.animate(instant);
+      this.element.classList.remove('left');
+      return this.element.classList.remove('right');
+    });
 
     return Pane;
 

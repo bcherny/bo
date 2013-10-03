@@ -23,6 +23,9 @@ define (require, exports, module) ->
 			# init panes
 			_.each panes, @registerPane
 
+			# hide all panes
+			@hideAll()
+
 			# show first pane
 			@show _.one @panes
 
@@ -52,15 +55,33 @@ define (require, exports, module) ->
 
 		show: (id) ->
 
+
 			# sanity check
 			# if not @panes[id]?
 			# 	console.error 'Bo.show called with unregistered pane "' + id + '". Be sure to register it first!'
 
-			# hide panes
-			@hideAll()
+			# hide active pane
+			newPane = @panes[id]
+			oldPane = @panes[@state.get 'active']
 
-			# show this pane
-			@panes[id].show()
+			if oldPane
+
+				# slide left
+				if newPane.index > oldPane.index
+					
+					oldPane.left()
+					newPane.right(true).show()
+
+				# slide right
+				else
+
+					oldPane.right()
+					newPane.left(true).show()
+
+			# first call
+			else
+				# just show this pane
+				newPane.show()
 
 			# register it
 			@state.set 'active', id

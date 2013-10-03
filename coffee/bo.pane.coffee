@@ -1,6 +1,7 @@
 define (require, exports, module) ->
 
 	Bo = require 'bo'
+	_ = require 'bo.util'
 
 	paneIdCounter = 0
 
@@ -10,8 +11,8 @@ define (require, exports, module) ->
 		document.body.appendChild element
 		element
 
-	makeId = ->
-		'pane' + (++paneIdCounter)
+	makeId = (counter) ->
+		'pane' + counter
 
 	class Bo.Pane
 
@@ -20,11 +21,14 @@ define (require, exports, module) ->
 
 		constructor: (@options) ->
 
+			++paneIdCounter
+
 			element = @options.element
 			html = @options.html
 			idAttr = if element then element.getAttribute 'data-bo-pane' else undefined
-			@id = @options.id or idAttr or makeId()
+			@id = @options.id or idAttr or makeId paneIdCounter
 			@element = element or makePane @id
+			@index = @options.index or paneIdCounter
 
 			# set ID
 			@element.setAttribute 'data-bo-pane', @id
@@ -37,32 +41,26 @@ define (require, exports, module) ->
 
 			@element.classList.remove 'animate'
 
-		left: ->
+		animate: (instant) ->
 
-			console.log 'left', @element
+			if not instant
+				@element.classList.add 'animate'
+				setTimeout @clearAnimation, @options.animationDuration
 
-			@element.classList.add 'animate'
+		left: _.fluent (instant) ->
+
+			@animate instant
 			@element.classList.remove 'right'
 			@element.classList.add 'left'
 
-			setTimeout @clearAnimation, @options.animationDuration
+		right: _.fluent (instant) ->
 
-		right: ->
-
-			console.log 'right', @element, @options.animationDuration
-
-			@element.classList.add 'animate'
+			@animate instant
 			@element.classList.remove 'left'
 			@element.classList.add 'right'
 
-			setTimeout @clearAnimation, @options.animationDuration
+		show: _.fluent (instant) ->
 
-		show: ->
-
-			console.log 'show', @element
-
-			@element.classList.add 'animate'
+			@animate instant
 			@element.classList.remove 'left'
 			@element.classList.remove 'right'
-
-			setTimeout @clearAnimation, @options.animationDuration

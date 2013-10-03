@@ -29,6 +29,12 @@ define(function(require, exports, module) {
       }
       return one;
     },
+    fluent: function(fn) {
+      return function() {
+        fn.apply(this, arguments);
+        return this;
+      };
+    },
     one: function(obj) {
       var id;
       for (id in obj) {

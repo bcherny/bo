@@ -23,6 +23,7 @@ define(function(require, exports, module) {
       var panes;
       panes = document.querySelectorAll('[' + this.options.paneAttribute + ']');
       _.each(panes, this.registerPane);
+      this.hideAll();
       this.show(_.one(this.panes));
       document.addEventListener('click', this.click);
     }
@@ -56,8 +57,20 @@ define(function(require, exports, module) {
     };
 
     Bo.prototype.show = function(id) {
-      this.hideAll();
-      this.panes[id].show();
+      var newPane, oldPane;
+      newPane = this.panes[id];
+      oldPane = this.panes[this.state.get('active')];
+      if (oldPane) {
+        if (newPane.index > oldPane.index) {
+          oldPane.left();
+          newPane.right(true).show();
+        } else {
+          oldPane.right();
+          newPane.left(true).show();
+        }
+      } else {
+        newPane.show();
+      }
       return this.state.set('active', id);
     };
 

@@ -17,5 +17,10 @@ define (require, exports, module) ->
 				one[key] = two[key]
 			one
 
+		fluent: (fn) ->
+			->
+				fn.apply @, arguments
+				@
+
 		one: (obj) ->
 			return id for id of obj
