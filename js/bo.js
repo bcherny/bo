@@ -2,11 +2,20 @@
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 define(function(require, exports, module) {
-  var Bo, Model, Pane;
+  var Bo, Model, Pane, extend;
   Model = require('bo.model');
   Pane = require('bo.pane');
+  extend = function(one, two) {
+    var key, val, _i, _len;
+    for (val = _i = 0, _len = two.length; _i < _len; val = ++_i) {
+      key = two[val];
+      one[key] = two[key];
+    }
+    return one;
+  };
   return Bo = (function() {
     Bo.prototype.options = {
+      animationDuration: 200,
       paneAttribute: 'data-bo-pane',
       paneTriggerAttribute: 'data-bo-trigger-pane'
     };
@@ -17,29 +26,30 @@ define(function(require, exports, module) {
 
     function Bo() {
       this.click = __bind(this.click, this);
-      var element, panes, _i, _len;
+      var element, n, panes, _i, _len;
       panes = document.querySelectorAll('[' + this.options.paneAttribute + ']');
-      for (_i = 0, _len = panes.length; _i < _len; _i++) {
-        element = panes[_i];
-        this.registerPane(element);
+      for (n = _i = 0, _len = panes.length; _i < _len; n = ++_i) {
+        element = panes[n];
+        this.registerPane(element, n);
       }
       this.showFirst();
       document.addEventListener('click', this.click);
     }
 
-    Bo.prototype.registerPane = function(element) {
-      var pane;
+    Bo.prototype.registerPane = function(element, index) {
+      var opts, pane;
       if (typeof element === 'String' || typeof element === 'Number') {
-        pane = new Pane({
+        opts = {
           id: element
-        });
-        return this.panes[element] = pane;
+        };
       } else {
-        pane = new Pane({
-          element: element
-        });
-        return this.panes[pane.id] = pane;
+        opts = {
+          element: element,
+          index: index
+        };
       }
+      pane = new Pane(extend(opts, this.options));
+      return this.panes[pane.id] = pane;
     };
 
     Bo.prototype.hideAll = function() {
@@ -48,7 +58,7 @@ define(function(require, exports, module) {
       _results = [];
       for (id in _ref) {
         pane = _ref[id];
-        _results.push(pane.hide());
+        _results.push(pane.right());
       }
       return _results;
     };

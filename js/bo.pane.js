@@ -2,18 +2,16 @@
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 define(function(require, exports, module) {
-  var Bo, makeId, paneIdCounter;
+  var Bo, makeId, makePane, paneIdCounter;
   Bo = require('bo');
   paneIdCounter = 0;
-  ({
-    makePane: function(id) {
-      var element;
-      element = document.createElement('div');
-      element.setAttribute('data-bo-pane', id);
-      document.body.appendChild(element);
-      return element;
-    }
-  });
+  makePane = function(id) {
+    var element;
+    element = document.createElement('div');
+    element.setAttribute('data-bo-pane', id);
+    document.body.appendChild(element);
+    return element;
+  };
   makeId = function() {
     return 'pane' + (++paneIdCounter);
   };
@@ -25,9 +23,7 @@ define(function(require, exports, module) {
     function Pane(options) {
       var element, html, idAttr;
       this.options = options;
-      this.toggle = __bind(this.toggle, this);
-      this.show = __bind(this.show, this);
-      this.hide = __bind(this.hide, this);
+      this.clearAnimation = __bind(this.clearAnimation, this);
       element = this.options.element;
       html = this.options.html;
       idAttr = element ? element.getAttribute('data-bo-pane') : void 0;
@@ -39,16 +35,33 @@ define(function(require, exports, module) {
       }
     }
 
-    Pane.prototype.hide = function() {
-      return this.element.classList.remove('active');
+    Pane.prototype.clearAnimation = function() {
+      console.log('clear', this.element);
+      return this.element.classList.remove('animate');
+    };
+
+    Pane.prototype.left = function() {
+      console.log('left', this.element);
+      this.element.classList.add('animate');
+      this.element.classList.remove('right');
+      this.element.classList.add('left');
+      return setTimeout(this.clearAnimation, this.options.animationDuration);
+    };
+
+    Pane.prototype.right = function() {
+      console.log('right', this.element, this.options.animationDuration);
+      this.element.classList.add('animate');
+      this.element.classList.remove('left');
+      this.element.classList.add('right');
+      return setTimeout(this.clearAnimation, this.options.animationDuration);
     };
 
     Pane.prototype.show = function() {
-      return this.element.classList.add('active');
-    };
-
-    Pane.prototype.toggle = function() {
-      return this.element.classList.toggle('active');
+      console.log('show', this.element);
+      this.element.classList.add('animate');
+      this.element.classList.remove('left');
+      this.element.classList.remove('right');
+      return setTimeout(this.clearAnimation, this.options.animationDuration);
     };
 
     return Pane;

@@ -4,7 +4,7 @@ define (require, exports, module) ->
 
 	paneIdCounter = 0
 
-	makePane: (id) ->
+	makePane = (id) ->
 		element = document.createElement 'div'
 		element.setAttribute 'data-bo-pane', id
 		document.body.appendChild element
@@ -23,7 +23,6 @@ define (require, exports, module) ->
 			element = @options.element
 			html = @options.html
 			idAttr = if element then element.getAttribute 'data-bo-pane' else undefined
-
 			@id = @options.id or idAttr or makeId()
 			@element = element or makePane @id
 
@@ -34,11 +33,38 @@ define (require, exports, module) ->
 			if html
 				@element.innerHTML = html
 
-		hide: =>
-			@element.classList.remove 'active'
+		clearAnimation: =>
 
-		show: =>
-			@element.classList.add 'active'
+			console.log 'clear', @element
 
-		toggle: =>
-			@element.classList.toggle 'active'
+			@element.classList.remove 'animate'
+
+		left: ->
+
+			console.log 'left', @element
+
+			@element.classList.add 'animate'
+			@element.classList.remove 'right'
+			@element.classList.add 'left'
+
+			setTimeout @clearAnimation, @options.animationDuration
+
+		right: ->
+
+			console.log 'right', @element, @options.animationDuration
+
+			@element.classList.add 'animate'
+			@element.classList.remove 'left'
+			@element.classList.add 'right'
+
+			setTimeout @clearAnimation, @options.animationDuration
+
+		show: ->
+
+			console.log 'show', @element
+
+			@element.classList.add 'animate'
+			@element.classList.remove 'left'
+			@element.classList.remove 'right'
+
+			setTimeout @clearAnimation, @options.animationDuration

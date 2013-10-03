@@ -3,10 +3,16 @@ define (require, exports, module) ->
 	Model = require 'bo.model'
 	Pane = require 'bo.pane'
 
+	extend = (one, two) ->
+		for key, val in two
+			one[key] = two[key]
+		one
+
 	class Bo
 
 		options:
 
+			animationDuration: 200
 			paneAttribute: 'data-bo-pane'
 			paneTriggerAttribute: 'data-bo-trigger-pane'
 
@@ -19,8 +25,8 @@ define (require, exports, module) ->
 			panes = document.querySelectorAll '[' + @options.paneAttribute + ']'
 
 			# init panes
-			for element in panes
-				@registerPane element
+			for element, n in panes
+				@registerPane element, n
 
 			# show first pane
 			@showFirst()
@@ -29,24 +35,24 @@ define (require, exports, module) ->
 			document.addEventListener 'click', @click
 
 		# {String|Number|DOMElement} element
-		registerPane: (element) ->
+		registerPane: (element, index) ->
 
 			if typeof element is 'String' or typeof element is 'Number'
-
-				pane = new Pane
+				opts =
 					id: element
-				@panes[element] = pane
 
 			else
-
-				pane = new Pane
+				opts =
 					element: element
-				@panes[pane.id] = pane
+					index: index
+
+			pane = new Pane extend(opts, @options)
+			@panes[pane.id] = pane
 
 		hideAll: ->
 
 			for id, pane of @panes
-				pane.hide()
+				pane.right()
 
 		showFirst: ->
 

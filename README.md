@@ -1,3 +1,7 @@
+# bomobile
+
+a small framework for authoring mobile apps with native-like performance. full unit test coverage.
+
 ## usage
 
 ### `Bo.Pane options`
