@@ -28,7 +28,7 @@ define(function(require, exports, module) {
       document.addEventListener('click', this.click);
     }
 
-    Bo.prototype.registerPane = function(element, index) {
+    Bo.prototype.registerPane = function(element) {
       var opts, pane;
       if (typeof element === 'String' || typeof element === 'Number') {
         opts = {
@@ -36,8 +36,7 @@ define(function(require, exports, module) {
         };
       } else {
         opts = {
-          element: element,
-          index: index
+          element: element
         };
       }
       opts = _.extend(opts, this.options);

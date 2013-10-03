@@ -33,7 +33,7 @@ define (require, exports, module) ->
 			document.addEventListener 'click', @click
 
 		# {String|Number|DOMElement} element
-		registerPane: (element, index) =>
+		registerPane: (element) =>
 
 			if typeof element is 'String' or typeof element is 'Number'
 				opts =
@@ -42,7 +42,6 @@ define (require, exports, module) ->
 			else
 				opts =
 					element: element
-					index: index
 
 			opts = _.extend opts, @options
 			pane = new Pane opts
