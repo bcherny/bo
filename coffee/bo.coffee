@@ -12,6 +12,10 @@ define (require, exports, module) ->
 			paneAttribute: 'data-bo-pane'
 			paneTriggerAttribute: 'data-bo-trigger-pane'
 
+		events:
+
+			'click': 'click'
+
 		panes: {}
 		state: new Model
 
@@ -30,7 +34,11 @@ define (require, exports, module) ->
 			@show _.one @panes
 
 			# events
-			document.addEventListener 'click', @click
+			_.each @events, @attachEvent
+
+		attachEvent: (fn, type) =>
+
+			document.addEventListener type, @[fn]
 
 		# {String|Number|DOMElement} element
 		registerPane: (element) =>
@@ -49,19 +57,14 @@ define (require, exports, module) ->
 
 		hideAll: ->
 
-			for id, pane of @panes
-				pane.right()
+			_.each @panes, (n, pane) ->
+				pane.right true
 
 		show: (id) ->
 
-
-			# sanity check
-			# if not @panes[id]?
-			# 	console.error 'Bo.show called with unregistered pane "' + id + '". Be sure to register it first!'
-
 			# hide active pane
 			newPane = @panes[id]
-			oldPane = @panes[@state.get 'active']
+			oldPane = @state.get 'active'
 
 			if oldPane
 
@@ -77,13 +80,12 @@ define (require, exports, module) ->
 					oldPane.right()
 					newPane.left(true).show()
 
-			# first call
+			# first call, just show this pane
 			else
-				# just show this pane
-				newPane.show()
+				newPane.show true
 
 			# register it
-			@state.set 'active', id
+			@state.set 'active', newPane
 
 		click: (event) =>
 

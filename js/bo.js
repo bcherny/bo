@@ -13,6 +13,10 @@ define(function(require, exports, module) {
       paneTriggerAttribute: 'data-bo-trigger-pane'
     };
 
+    Bo.prototype.events = {
+      'click': 'click'
+    };
+
     Bo.prototype.panes = {};
 
     Bo.prototype.state = new Model;
@@ -20,13 +24,18 @@ define(function(require, exports, module) {
     function Bo() {
       this.click = __bind(this.click, this);
       this.registerPane = __bind(this.registerPane, this);
+      this.attachEvent = __bind(this.attachEvent, this);
       var panes;
       panes = document.querySelectorAll('[' + this.options.paneAttribute + ']');
       _.each(panes, this.registerPane);
       this.hideAll();
       this.show(_.one(this.panes));
-      document.addEventListener('click', this.click);
+      _.each(this.events, this.attachEvent);
     }
+
+    Bo.prototype.attachEvent = function(fn, type) {
+      return document.addEventListener(type, this[fn]);
+    };
 
     Bo.prototype.registerPane = function(element) {
       var opts, pane;
@@ -45,20 +54,15 @@ define(function(require, exports, module) {
     };
 
     Bo.prototype.hideAll = function() {
-      var id, pane, _ref, _results;
-      _ref = this.panes;
-      _results = [];
-      for (id in _ref) {
-        pane = _ref[id];
-        _results.push(pane.right());
-      }
-      return _results;
+      return _.each(this.panes, function(n, pane) {
+        return pane.right(true);
+      });
     };
 
     Bo.prototype.show = function(id) {
       var newPane, oldPane;
       newPane = this.panes[id];
-      oldPane = this.panes[this.state.get('active')];
+      oldPane = this.state.get('active');
       if (oldPane) {
         if (newPane.index > oldPane.index) {
           oldPane.left();
@@ -68,9 +72,9 @@ define(function(require, exports, module) {
           newPane.left(true).show();
         }
       } else {
-        newPane.show();
+        newPane.show(true);
       }
-      return this.state.set('active', id);
+      return this.state.set('active', newPane);
     };
 
     Bo.prototype.click = function(event) {
