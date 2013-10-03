@@ -11,22 +11,26 @@
 </head>
 <body>
 
-	<div data-bo-pane="main">
+	<div id="frame">
 
-		<h1>Hello world!</h1>
+		<div data-bo-pane="main">
 
-		<button data-bo-trigger-pane="second">Next</button>
-		
-	</div>
+			<h1>Hello world!</h1>
 
-	<div data-bo-pane="second">
+			<button data-bo-trigger-pane="second">Next</button>
+			
+		</div>
 
-		<h1>A second page</h1>
+		<div data-bo-pane="second">
 
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua.</p>
+			<h1>A second page</h1>
 
-		<button data-bo-trigger-pane="main">Back</button>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua.</p>
+
+			<button data-bo-trigger-pane="main">Back</button>
+
+		</div>
 
 	</div>
 
