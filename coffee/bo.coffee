@@ -2,14 +2,7 @@ define (require, exports, module) ->
 
 	Model = require 'bo.model'
 	Pane = require 'bo.pane'
-
-	extend = (one, two) ->
-		for key, val in two
-			one[key] = two[key]
-		one
-
-	one = (obj) ->
-		return id for id of obj
+	_ = require 'bo.util'
 
 	class Bo
 
@@ -28,17 +21,16 @@ define (require, exports, module) ->
 			panes = document.querySelectorAll '[' + @options.paneAttribute + ']'
 
 			# init panes
-			for element, n in panes
-				@registerPane element, n
+			_.each panes, @registerPane
 
 			# show first pane
-			@show one(@panes)
+			@show _.one @panes
 
 			# events
 			document.addEventListener 'click', @click
 
 		# {String|Number|DOMElement} element
-		registerPane: (element, index) ->
+		registerPane: (element, index) =>
 
 			if typeof element is 'String' or typeof element is 'Number'
 				opts =
@@ -49,7 +41,7 @@ define (require, exports, module) ->
 					element: element
 					index: index
 
-			opts = extend opts, @options
+			opts = _.extend opts, @options
 			pane = new Pane opts
 			@panes[pane.id] = pane
 

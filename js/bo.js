@@ -2,23 +2,10 @@
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 define(function(require, exports, module) {
-  var Bo, Model, Pane, extend, one;
+  var Bo, Model, Pane, _;
   Model = require('bo.model');
   Pane = require('bo.pane');
-  extend = function(one, two) {
-    var key, val, _i, _len;
-    for (val = _i = 0, _len = two.length; _i < _len; val = ++_i) {
-      key = two[val];
-      one[key] = two[key];
-    }
-    return one;
-  };
-  one = function(obj) {
-    var id;
-    for (id in obj) {
-      return id;
-    }
-  };
+  _ = require('bo.util');
   return Bo = (function() {
     Bo.prototype.options = {
       animationDuration: 200,
@@ -32,13 +19,11 @@ define(function(require, exports, module) {
 
     function Bo() {
       this.click = __bind(this.click, this);
-      var element, n, panes, _i, _len;
+      this.registerPane = __bind(this.registerPane, this);
+      var panes;
       panes = document.querySelectorAll('[' + this.options.paneAttribute + ']');
-      for (n = _i = 0, _len = panes.length; _i < _len; n = ++_i) {
-        element = panes[n];
-        this.registerPane(element, n);
-      }
-      this.show(one(this.panes));
+      _.each(panes, this.registerPane);
+      this.show(_.one(this.panes));
       document.addEventListener('click', this.click);
     }
 
@@ -54,7 +39,7 @@ define(function(require, exports, module) {
           index: index
         };
       }
-      opts = extend(opts, this.options);
+      opts = _.extend(opts, this.options);
       pane = new Pane(opts);
       return this.panes[pane.id] = pane;
     };
