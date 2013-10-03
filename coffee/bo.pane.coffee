@@ -22,13 +22,13 @@ define (require, exports, module) ->
 
 			element = @options.element
 			html = @options.html
-			idAttr = if element then element.getAttribute 'id' else undefined
+			idAttr = if element then element.getAttribute 'data-bo-pane' else undefined
 
 			@id = @options.id or idAttr or makeId()
 			@element = element or makePane @id
 
 			# set ID
-			@element.setAttribute 'id', @id
+			@element.setAttribute 'data-bo-pane', @id
 
 			# set HTML?
 			if html

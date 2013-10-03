@@ -30,10 +30,10 @@ define(function(require, exports, module) {
       this.hide = __bind(this.hide, this);
       element = this.options.element;
       html = this.options.html;
-      idAttr = element ? element.getAttribute('id') : void 0;
+      idAttr = element ? element.getAttribute('data-bo-pane') : void 0;
       this.id = this.options.id || idAttr || makeId();
       this.element = element || makePane(this.id);
-      this.element.setAttribute('id', this.id);
+      this.element.setAttribute('data-bo-pane', this.id);
       if (html) {
         this.element.innerHTML = html;
       }
