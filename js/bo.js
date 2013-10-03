@@ -2,7 +2,8 @@
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 define(function(require, exports, module) {
-  var Bo, Pane;
+  var Bo, Model, Pane;
+  Model = require('bo.model');
   Pane = require('bo.pane');
   return Bo = (function() {
     Bo.prototype.options = {
@@ -12,7 +13,7 @@ define(function(require, exports, module) {
 
     Bo.prototype.panes = {};
 
-    Bo.prototype.state = {};
+    Bo.prototype.state = new Model;
 
     function Bo() {
       this.click = __bind(this.click, this);
@@ -25,14 +26,6 @@ define(function(require, exports, module) {
       this.showFirst();
       document.addEventListener('click', this.click);
     }
-
-    Bo.prototype.get = function(key) {
-      return this.state[key];
-    };
-
-    Bo.prototype.set = function(key, value) {
-      return this.state[key] = value;
-    };
 
     Bo.prototype.registerPane = function(element) {
       var pane;
@@ -76,7 +69,7 @@ define(function(require, exports, module) {
       }
       this.hideAll();
       this.panes[id].show();
-      return this.set('active', id);
+      return this.state.set('active', id);
     };
 
     Bo.prototype.click = function(event) {

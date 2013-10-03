@@ -1,5 +1,6 @@
 define (require, exports, module) ->
 
+	Model = require 'bo.model'
 	Pane = require 'bo.pane'
 
 	class Bo
@@ -10,7 +11,7 @@ define (require, exports, module) ->
 			paneTriggerAttribute: 'data-bo-trigger-pane'
 
 		panes: {}
-		state: {}
+		state: new Model
 
 		constructor: ->
 
@@ -26,16 +27,6 @@ define (require, exports, module) ->
 
 			# events
 			document.addEventListener 'click', @click
-
-		# {String|Number} key
-		get: (key) ->
-
-			@state[key]
-
-		# {String|Number} key, {Mixed} value
-		set: (key, value) ->
-
-			@state[key] = value
 
 		# {String|Number|DOMElement} element
 		registerPane: (element) ->
@@ -76,7 +67,7 @@ define (require, exports, module) ->
 			@panes[id].show()
 
 			# register it
-			@set 'active', id
+			@state.set 'active', id
 
 		click: (event) =>
 
