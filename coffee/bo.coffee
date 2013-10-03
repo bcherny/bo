@@ -8,6 +8,9 @@ define (require, exports, module) ->
 			one[key] = two[key]
 		one
 
+	one = (obj) ->
+		return id for id of obj
+
 	class Bo
 
 		options:
@@ -29,7 +32,7 @@ define (require, exports, module) ->
 				@registerPane element, n
 
 			# show first pane
-			@showFirst()
+			@show one(@panes)
 
 			# events
 			document.addEventListener 'click', @click
@@ -46,7 +49,8 @@ define (require, exports, module) ->
 					element: element
 					index: index
 
-			pane = new Pane extend(opts, @options)
+			opts = extend opts, @options
+			pane = new Pane opts
 			@panes[pane.id] = pane
 
 		hideAll: ->
@@ -54,17 +58,11 @@ define (require, exports, module) ->
 			for id, pane of @panes
 				pane.right()
 
-		showFirst: ->
-
-			for id of @panes
-				@show id
-				break
-
 		show: (id) ->
 
 			# sanity check
-			if not @panes[id]?
-				console.error 'Bo.show called with unregistered pane "' + id + '". Be sure to register it first!'
+			# if not @panes[id]?
+			# 	console.error 'Bo.show called with unregistered pane "' + id + '". Be sure to register it first!'
 
 			# hide panes
 			@hideAll()

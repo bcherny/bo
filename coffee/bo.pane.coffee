@@ -35,8 +35,6 @@ define (require, exports, module) ->
 
 		clearAnimation: =>
 
-			console.log 'clear', @element
-
 			@element.classList.remove 'animate'
 
 		left: ->

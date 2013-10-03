@@ -2,7 +2,7 @@
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 define(function(require, exports, module) {
-  var Bo, Model, Pane, extend;
+  var Bo, Model, Pane, extend, one;
   Model = require('bo.model');
   Pane = require('bo.pane');
   extend = function(one, two) {
@@ -12,6 +12,12 @@ define(function(require, exports, module) {
       one[key] = two[key];
     }
     return one;
+  };
+  one = function(obj) {
+    var id;
+    for (id in obj) {
+      return id;
+    }
   };
   return Bo = (function() {
     Bo.prototype.options = {
@@ -32,7 +38,7 @@ define(function(require, exports, module) {
         element = panes[n];
         this.registerPane(element, n);
       }
-      this.showFirst();
+      this.show(one(this.panes));
       document.addEventListener('click', this.click);
     }
 
@@ -48,7 +54,8 @@ define(function(require, exports, module) {
           index: index
         };
       }
-      pane = new Pane(extend(opts, this.options));
+      opts = extend(opts, this.options);
+      pane = new Pane(opts);
       return this.panes[pane.id] = pane;
     };
 
@@ -63,20 +70,7 @@ define(function(require, exports, module) {
       return _results;
     };
 
-    Bo.prototype.showFirst = function() {
-      var id, _results;
-      _results = [];
-      for (id in this.panes) {
-        this.show(id);
-        break;
-      }
-      return _results;
-    };
-
     Bo.prototype.show = function(id) {
-      if (this.panes[id] == null) {
-        console.error('Bo.show called with unregistered pane "' + id + '". Be sure to register it first!');
-      }
       this.hideAll();
       this.panes[id].show();
       return this.state.set('active', id);

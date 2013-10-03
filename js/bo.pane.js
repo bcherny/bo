@@ -36,7 +36,6 @@ define(function(require, exports, module) {
     }
 
     Pane.prototype.clearAnimation = function() {
-      console.log('clear', this.element);
       return this.element.classList.remove('animate');
     };
 
