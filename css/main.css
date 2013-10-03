@@ -1,10 +1,6 @@
 body {
   font: 13px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
-h1 {
-  margin: 100px 0 20px;
-  text-align: center;
-}
 button {
   background: -webkit-linear-gradient(-90deg, #eee, #ddd);
   border-radius: 3px;
@@ -13,4 +9,16 @@ button {
   margin: 0 auto;
   padding: 20px 60px;
   -webkit-appearance: none;
+}
+h1 {
+  margin: 100px 0 20px;
+  text-align: center;
+}
+p {
+  color: #666;
+  margin: 0 auto 30px;
+  width: 184px;
+}
+[data-bo-pane="second"] h1 {
+  margin-top: 60px;
 }
