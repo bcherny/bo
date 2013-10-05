@@ -50,7 +50,7 @@ define (require, exports, module) ->
 
 		hideAll: ->
 
-			_.each @panes, (id, pane) ->
+			_.each @panes, (pane) ->
 				pane.right true
 
 		show: (id) ->

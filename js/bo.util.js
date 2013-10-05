@@ -2,9 +2,8 @@
 var __slice = [].slice;
 
 define(function(require, exports, module) {
-  var Bo;
-  Bo = require('bo');
-  return Bo.Util = {
+  var Util;
+  return Util = {
     each: function(collection, fn) {
       var key, value, _i, _len, _results, _results1;
       if (collection.length) {
@@ -16,8 +15,8 @@ define(function(require, exports, module) {
         return _results;
       } else {
         _results1 = [];
-        for (value in collection) {
-          key = collection[value];
+        for (key in collection) {
+          value = collection[key];
           _results1.push(fn(value, key));
         }
         return _results1;
@@ -45,9 +44,9 @@ define(function(require, exports, module) {
         return this;
       };
     },
-    one: function(obj) {
+    one: function(collection) {
       var id;
-      for (id in obj) {
+      for (id in collection) {
         return id;
       }
     }

@@ -20,7 +20,7 @@ define(function(require, exports, module) {
       }
     }
 
-    View.prototype.attachEvent = function(type, fn) {
+    View.prototype.attachEvent = function(fn, type) {
       var t, types, _i, _len, _results;
       types = type.split(' ');
       _results = [];

@@ -56,7 +56,7 @@ define(function(require, exports, module) {
     };
 
     Bo.prototype.hideAll = function() {
-      return _.each(this.panes, function(id, pane) {
+      return _.each(this.panes, function(pane) {
         return pane.right(true);
       });
     };

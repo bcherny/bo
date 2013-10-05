@@ -15,7 +15,7 @@ define (require, exports, module) ->
 			if typeof @initialize is 'function'
 				@initialize.apply @, arguments
 
-		attachEvent: (type, fn) =>
+		attachEvent: (fn, type) =>
 
 			types = type.split ' '
 

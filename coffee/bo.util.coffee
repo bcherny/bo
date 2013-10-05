@@ -1,15 +1,14 @@
 define (require, exports, module) ->
 
-	Bo = require 'bo'
-
-	Bo.Util =
+	Util =
 
 		each: (collection, fn) ->
+
 			if collection.length
 				for value, key in collection
 					fn value, key
 			else
-				for value, key of collection
+				for key, value of collection
 					fn value, key
 
 		extend: (obj, others...) ->
@@ -25,9 +24,11 @@ define (require, exports, module) ->
 			obj
 
 		fluent: (fn) ->
+
 			->
 				fn.apply @, arguments
 				@
 
-		one: (obj) ->
-			return id for id of obj
+		one: (collection) ->
+
+			return id for id of collection
