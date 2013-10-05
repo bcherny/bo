@@ -49,11 +49,10 @@ define (require, module, exports) ->
 			model.set key, value2
 			expect(model.get(key)).to.equal value2
 
+
 	describe 'Bo.Util', ->
 
-
 		describe '#each', ->
-
 
 			it 'should iterate over arrays', ->
 
@@ -73,7 +72,6 @@ define (require, module, exports) ->
 				Util.each collection, accumulate
 
 				expect(sums).to.deep.equal expected
-
 
 			it 'should iterate over objects', ->
 
@@ -108,7 +106,6 @@ define (require, module, exports) ->
 
 		describe '#extend', ->
 
-
 			it 'should extend one object with 1 other object', ->
 
 				one = foo: 5
@@ -119,7 +116,6 @@ define (require, module, exports) ->
 				result = Util.extend one, two
 
 				expect(result).to.deep.equal expected
-
 
 			it 'should extend one object with >1 other objects', ->
 
@@ -137,7 +133,6 @@ define (require, module, exports) ->
 
 		describe '#fluent', ->
 
-
 			it 'should return `this`', ->
 
 				fn = ->
@@ -149,7 +144,6 @@ define (require, module, exports) ->
 
 		describe '#one', ->
 
-
 			it 'should return the first key of an object', ->
 
 				obj =
@@ -158,6 +152,6 @@ define (require, module, exports) ->
 				result = Util.one obj
 
 				expect(result).to.equal 'foo'
-				
+
 
 	mocha.run()
