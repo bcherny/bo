@@ -19,27 +19,39 @@
 
 			<h1>Hello world!</h1>
 
-			<button data-bo-trigger-pane="second">Next</button>
+			<button data-bo-trigger-pane="two">Next</button>
 			
 		</div>
 
-		<div data-bo-pane="second">
+		<div data-bo-pane="two">
 
-			<h1>A second page</h1>
+			<h1>one > <strong>two</strong></h1>
 
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 			tempor incididunt ut labore et dolore magna aliqua.</p>
 
 			<span class="buttons">
+				<button class="inline" data-bo-trigger-pane="three">Another</button>
+				<button class="inline" data-bo-trigger-pane="four">Or this one</button>
 				<button class="inline" data-bo-trigger-pane="main">Back</button>
-				<button class="inline" data-bo-trigger-pane="third">Another</button>
 			</span>
 
 		</div>
 
-		<div data-bo-pane="third">
+		<div data-bo-pane="three">
 
-			<h1>A <strong>third</strong> page</h1>
+			<h1>one > two > <strong>three</strong></h1>
+
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua.</p>
+
+			<button data-bo-trigger-pane="second">Back</button>
+
+		</div>
+
+		<div data-bo-pane="four">
+
+			<h1>one > two > <strong>four</strong></h1>
 
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 			tempor incididunt ut labore et dolore magna aliqua.</p>

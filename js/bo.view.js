@@ -11,6 +11,10 @@ define(function(require, exports, module) {
   return View = (function(_super) {
     __extends(View, _super);
 
+    View.prototype.events = {};
+
+    View.prototype.initialize = function() {};
+
     function View() {
       this.attachEvent = __bind(this.attachEvent, this);
       if (izzy.object(this.events)) {
