@@ -5,21 +5,16 @@ define(function(require, exports, module) {
   var Util;
   return Util = {
     each: function(collection, fn) {
-      var key, value, _i, _len, _results, _results1;
-      if (collection.length) {
+      var key, value, _results;
+      if (collection.forEach) {
+        return collection.forEach(fn);
+      } else {
         _results = [];
-        for (key = _i = 0, _len = collection.length; _i < _len; key = ++_i) {
+        for (key in collection) {
           value = collection[key];
           _results.push(fn(value, key));
         }
         return _results;
-      } else {
-        _results1 = [];
-        for (key in collection) {
-          value = collection[key];
-          _results1.push(fn(value, key));
-        }
-        return _results1;
       }
     },
     extend: function() {

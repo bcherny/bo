@@ -4,9 +4,8 @@ define (require, exports, module) ->
 
 		each: (collection, fn) ->
 
-			if collection.length
-				for value, key in collection
-					fn value, key
+			if collection.forEach
+				collection.forEach fn
 			else
 				for key, value of collection
 					fn value, key
