@@ -33,5 +33,8 @@
     "chai": "~1.8.0",
     "mocha": "~1.13.0",
     "requirejs": "~2.1.8"
+  },
+  "dependencies": {
+    "izzy": "~0.1.1"
   }
 }

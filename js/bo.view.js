@@ -12,8 +12,12 @@ define(function(require, exports, module) {
 
     function View() {
       this.attachEvent = __bind(this.attachEvent, this);
-      _.each(this.events, this.attachEvent);
-      this.initialize.apply(this, arguments);
+      if (this.events) {
+        _.each(this.events, this.attachEvent);
+      }
+      if (typeof this.initialize === 'function') {
+        this.initialize.apply(this, arguments);
+      }
     }
 
     View.prototype.attachEvent = function(type, fn) {

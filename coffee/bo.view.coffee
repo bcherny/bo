@@ -8,10 +8,12 @@ define (require, exports, module) ->
 		constructor: ->
 
 			# events
-			_.each @events, @attachEvent
+			if @events
+				_.each @events, @attachEvent
 
 			# go for it
-			@initialize.apply @, arguments
+			if typeof @initialize is 'function'
+				@initialize.apply @, arguments
 
 		attachEvent: (type, fn) =>
 
