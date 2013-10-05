@@ -1,21 +1,21 @@
 define (require, exports, module) ->
 
+	izzy = require 'izzy'
+
 	Util =
 
 		each: (collection, fn) ->
 
-			if collection.forEach
-				collection.forEach fn
-			else
+			if izzy.array collection
+				for value, key in collection
+					fn value, key
+			else if izzy.object collection
 				for key, value of collection
 					fn value, key
 
 		extend: (obj, others...) ->
 
-			if !obj
-				throw new TypeError 'extend expects argument 0 to be an Object'
-
-			if others
+			if obj and others
 				for other in others
 					for key of other
 						obj[key] = other[key]

@@ -4,7 +4,8 @@ var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments)
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
 define(function(require, exports, module) {
-  var Model, View, _;
+  var Model, View, izzy, _;
+  izzy = require('izzy');
   Model = require('bo.model');
   _ = require('bo.util');
   return View = (function(_super) {
@@ -12,10 +13,10 @@ define(function(require, exports, module) {
 
     function View() {
       this.attachEvent = __bind(this.attachEvent, this);
-      if (this.events) {
+      if (izzy.object(this.events)) {
         _.each(this.events, this.attachEvent);
       }
-      if (typeof this.initialize === 'function') {
+      if (izzy["function"](this.initialize)) {
         this.initialize.apply(this, arguments);
       }
     }

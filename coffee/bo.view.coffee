@@ -1,5 +1,6 @@
 define (require, exports, module) ->
 
+	izzy = require 'izzy'
 	Model = require 'bo.model'
 	_ = require 'bo.util'
 
@@ -8,11 +9,11 @@ define (require, exports, module) ->
 		constructor: ->
 
 			# events
-			if @events
+			if izzy.object @events
 				_.each @events, @attachEvent
 
 			# go for it
-			if typeof @initialize is 'function'
+			if izzy.function @initialize
 				@initialize.apply @, arguments
 
 		attachEvent: (fn, type) =>

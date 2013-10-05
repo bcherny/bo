@@ -2,28 +2,31 @@
 var __slice = [].slice;
 
 define(function(require, exports, module) {
-  var Util;
+  var Util, izzy;
+  izzy = require('izzy');
   return Util = {
     each: function(collection, fn) {
-      var key, value, _results;
-      if (collection.forEach) {
-        return collection.forEach(fn);
-      } else {
+      var key, value, _i, _len, _results, _results1;
+      if (izzy.array(collection)) {
         _results = [];
-        for (key in collection) {
+        for (key = _i = 0, _len = collection.length; _i < _len; key = ++_i) {
           value = collection[key];
           _results.push(fn(value, key));
         }
         return _results;
+      } else if (izzy.object(collection)) {
+        _results1 = [];
+        for (key in collection) {
+          value = collection[key];
+          _results1.push(fn(value, key));
+        }
+        return _results1;
       }
     },
     extend: function() {
       var key, obj, other, others, _i, _len;
       obj = arguments[0], others = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
-      if (!obj) {
-        throw new TypeError('extend expects argument 0 to be an Object');
-      }
-      if (others) {
+      if (obj && others) {
         for (_i = 0, _len = others.length; _i < _len; _i++) {
           other = others[_i];
           for (key in other) {
