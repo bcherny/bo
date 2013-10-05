@@ -24,6 +24,8 @@ A function called after the view is constructed and events are attached.
 
 			initialize: ->
 
+### View internals
+
 			constructor: ->
 
 				# events
