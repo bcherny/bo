@@ -16,8 +16,15 @@ define(function(require, exports, module) {
       this.initialize.apply(this, arguments);
     }
 
-    View.prototype.attachEvent = function(fn, type) {
-      return document.addEventListener(type, this[fn]);
+    View.prototype.attachEvent = function(type, fn) {
+      var t, types, _i, _len, _results;
+      types = type.split(' ');
+      _results = [];
+      for (_i = 0, _len = types.length; _i < _len; _i++) {
+        t = types[_i];
+        _results.push(document.addEventListener(t, this[fn]));
+      }
+      return _results;
     };
 
     return View;

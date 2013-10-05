@@ -13,6 +13,9 @@ define (require, exports, module) ->
 			# go for it
 			@initialize.apply @, arguments
 
-		attachEvent: (fn, type) =>
+		attachEvent: (type, fn) =>
 
-			document.addEventListener type, @[fn]
+			types = type.split ' '
+
+			for t in types
+				document.addEventListener t, @[fn]

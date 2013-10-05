@@ -15,7 +15,7 @@ define (require, exports, module) ->
 
 		events:
 
-			'click': 'click'
+			'touchstart click': 'click'
 
 		panes: {}
 

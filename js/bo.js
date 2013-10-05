@@ -26,7 +26,7 @@ define(function(require, exports, module) {
     };
 
     Bo.prototype.events = {
-      'click': 'click'
+      'touchstart click': 'click'
     };
 
     Bo.prototype.panes = {};

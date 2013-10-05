@@ -3,6 +3,8 @@
 <head>
 
 	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
 	<title>bo!</title>
 
 	<link rel="stylesheet" href="css/bo.css" />
@@ -28,7 +30,21 @@
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 			tempor incididunt ut labore et dolore magna aliqua.</p>
 
-			<button data-bo-trigger-pane="main">Back</button>
+			<span class="buttons">
+				<button class="inline" data-bo-trigger-pane="main">Back</button>
+				<button class="inline" data-bo-trigger-pane="third">Another</button>
+			</span>
+
+		</div>
+
+		<div data-bo-pane="third">
+
+			<h1>A <strong>third</strong> page</h1>
+
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua.</p>
+
+			<button data-bo-trigger-pane="second">Back</button>
 
 		</div>
 
