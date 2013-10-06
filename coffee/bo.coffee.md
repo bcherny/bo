@@ -45,8 +45,8 @@ then show first pane
 
 				@show _.one @panes
 
-# registerPane
-{String|Number|DOMElement} element
+## registerPane
+`{String|Number|DOMElement} element`
 
 			registerPane: (element) =>
 
@@ -72,6 +72,9 @@ then show first pane
 				# hide active pane
 				newPane = @panes[id]
 				oldPane = @get 'active'
+
+				if not newPane
+					throw new Error 'Pane with ID "' + id + '" does not exist in the DOM, or is not registered with Bo.'
 
 				if oldPane
 
