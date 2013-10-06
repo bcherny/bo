@@ -81,7 +81,7 @@ define(function(require, module, exports) {
       return TestView;
 
     })(View);
-    view = new TestView('foo', 'bar');
+    view = new TestView('foo', 'bar', 'baz');
     event = new CustomEvent('click');
     document.dispatchEvent(event);
     it('should call initialize() when constructed', function() {
@@ -91,7 +91,7 @@ define(function(require, module, exports) {
       return expect(spies.initialize.calledOnce).to.equal(true);
     });
     it('should pass its arguments to initialize()', function() {
-      return expect(spies.initialize.args[0]).to.deep.equal(['foo', 'bar']);
+      return expect(spies.initialize.args[0]).to.deep.equal(['bar', 'baz']);
     });
     it('should fire the corresponding event when fireEvent() is called', function() {
       return expect(spies.event.called).to.equal(true);

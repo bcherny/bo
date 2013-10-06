@@ -71,7 +71,7 @@ define (require, module, exports) ->
 				'click': 'handler'
 			handler: spies.event
 		
-		view = new TestView 'foo', 'bar'
+		view = new TestView 'foo', 'bar', 'baz'
 		event = new CustomEvent 'click'
 		document.dispatchEvent event
 
@@ -86,7 +86,7 @@ define (require, module, exports) ->
 
 		it 'should pass its arguments to initialize()', ->
 
-			expect(spies.initialize.args[0]).to.deep.equal ['foo', 'bar']
+			expect(spies.initialize.args[0]).to.deep.equal ['bar', 'baz']
 
 		it 'should fire the corresponding event when fireEvent() is called', ->
 
