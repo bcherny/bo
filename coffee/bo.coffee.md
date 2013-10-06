@@ -123,6 +123,8 @@ then show first pane
 
 			click: (event) =>
 
+				console.log 'click'
+
 				id = event.target.getAttribute @options.paneTriggerAttribute
 
 				if id

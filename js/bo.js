@@ -117,6 +117,7 @@ define(function(require, exports, module) {
 
     Bo.prototype.click = function(event) {
       var id;
+      console.log('click');
       id = event.target.getAttribute(this.options.paneTriggerAttribute);
       if (id) {
         event.preventDefault();

@@ -58,6 +58,46 @@ define (require, module, exports) ->
 			expect(model.get(key)).to.equal value2
 
 
+	describe 'Bo.View', ->
+
+		spies =
+			initialize: sinon.spy()
+			event: sinon.spy()
+
+		class TestView extends View
+			initialize: spies.initialize
+			events:
+				'click': 'handler'
+			handler: spies.event
+		
+		view = new TestView 'foo', 'bar'
+
+
+		it 'should call initialize() when constructed', ->
+
+			expect(spies.initialize.called).to.equal true
+
+		it 'should call initialize() exactly once', ->
+
+			expect(spies.initialize.calledOnce).to.equal true
+
+		it 'should pass its arguments to initialize()', ->
+
+			expect(spies.initialize.args[0]).to.deep.equal ['foo', 'bar']
+
+		it 'should fire the corresponding event when fireEvent() is called', ->
+
+			event = new CustomEvent 'click'
+			document.dispatchEvent event
+			expect(spies.event.called).to.equal true
+
+		it 'should fire the corresponding event exactly once when fireEvent() is called', ->
+
+			event = new CustomEvent 'click'
+			document.dispatchEvent event
+			expect(spies.event.calledTwice).to.equal true # twice because this is the second test firing this event off
+
+
 	describe 'Bo.Util', ->
 
 		describe '#each', ->
@@ -160,17 +200,6 @@ define (require, module, exports) ->
 				result = Util.one obj
 
 				expect(result).to.equal 'foo'
-
-
-	describe 'Bo.View', ->
-
-		it 'should call initialize()', ->
-
-			spy = sinon.spy()
-			view = new View
-				initialize: -> console.log 'call'
-
-			expect(spy.called).to.equal true
 
 
 	mocha.run()
