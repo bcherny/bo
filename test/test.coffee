@@ -60,6 +60,7 @@ define (require, module, exports) ->
 
 	describe 'Bo.View', ->
 
+
 		spies =
 			initialize: sinon.spy()
 			event: sinon.spy()
@@ -71,6 +72,8 @@ define (require, module, exports) ->
 			handler: spies.event
 		
 		view = new TestView 'foo', 'bar'
+		event = new CustomEvent 'click'
+		document.dispatchEvent event
 
 
 		it 'should call initialize() when constructed', ->
@@ -87,15 +90,11 @@ define (require, module, exports) ->
 
 		it 'should fire the corresponding event when fireEvent() is called', ->
 
-			event = new CustomEvent 'click'
-			document.dispatchEvent event
 			expect(spies.event.called).to.equal true
 
 		it 'should fire the corresponding event exactly once when fireEvent() is called', ->
 
-			event = new CustomEvent 'click'
-			document.dispatchEvent event
-			expect(spies.event.calledTwice).to.equal true # twice because this is the second test firing this event off
+			expect(spies.event.calledOnce).to.equal true
 
 
 	describe 'Bo.Util', ->

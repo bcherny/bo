@@ -57,7 +57,7 @@ define(function(require, module, exports) {
     });
   });
   describe('Bo.View', function() {
-    var TestView, spies, view, _ref;
+    var TestView, event, spies, view, _ref;
     spies = {
       initialize: sinon.spy(),
       event: sinon.spy()
@@ -82,6 +82,8 @@ define(function(require, module, exports) {
 
     })(View);
     view = new TestView('foo', 'bar');
+    event = new CustomEvent('click');
+    document.dispatchEvent(event);
     it('should call initialize() when constructed', function() {
       return expect(spies.initialize.called).to.equal(true);
     });
@@ -92,16 +94,10 @@ define(function(require, module, exports) {
       return expect(spies.initialize.args[0]).to.deep.equal(['foo', 'bar']);
     });
     it('should fire the corresponding event when fireEvent() is called', function() {
-      var event;
-      event = new CustomEvent('click');
-      document.dispatchEvent(event);
       return expect(spies.event.called).to.equal(true);
     });
     return it('should fire the corresponding event exactly once when fireEvent() is called', function() {
-      var event;
-      event = new CustomEvent('click');
-      document.dispatchEvent(event);
-      return expect(spies.event.calledTwice).to.equal(true);
+      return expect(spies.event.calledOnce).to.equal(true);
     });
   });
   describe('Bo.Util', function() {
