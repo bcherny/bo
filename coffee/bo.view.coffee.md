@@ -10,7 +10,7 @@
 
 ## API
 
-If you've used Backbone you will find this syntax familiar. It's offers a small subset of backbone's functionality.
+If you've used Backbone you will find this syntax familiar. It's a small subset of backbone's functionality.
 
 ### View.events
 
