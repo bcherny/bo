@@ -1,3 +1,7 @@
+require.config
+	paths:
+		izzy: '../node_modules/izzy/izzy'
+
 define (require, module, exports) ->
 
 	Model = require '../js/bo.model'
