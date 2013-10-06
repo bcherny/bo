@@ -15,7 +15,7 @@
 
 	<div id="frame">
 
-		<div data-bo-pane="main">
+		<div data-bo-pane="one">
 
 			<h1>Hello world!</h1>
 
@@ -25,38 +25,38 @@
 
 		<div data-bo-pane="two">
 
-			<h1>one > <strong>two</strong></h1>
+			<h1><span data-bo-trigger-pane="one">one</span> > <strong>two</strong></h1>
 
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 			tempor incididunt ut labore et dolore magna aliqua.</p>
 
 			<span class="buttons">
-				<button class="inline" data-bo-trigger-pane="main">Back</button>
-				<button class="inline" data-bo-trigger-pane="three">Another</button>
-				<button class="inline" data-bo-trigger-pane="four">Or this one</button>
+				<button class="subtle" data-bo-trigger-pane="one">Back</button>
+				<button data-bo-trigger-pane="three">Another</button>
+				<button data-bo-trigger-pane="four">Or this one</button>
 			</span>
 
 		</div>
 
 		<div data-bo-pane="three">
 
-			<h1>one > two > <strong>three</strong></h1>
+			<h1><span data-bo-trigger-pane="one">one</span> > <span data-bo-trigger-pane="two">two</span> > <strong>three</strong></h1>
 
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 			tempor incididunt ut labore et dolore magna aliqua.</p>
 
-			<button data-bo-trigger-pane="two">Back</button>
+			<button class="subtle" data-bo-trigger-pane="two">Back</button>
 
 		</div>
 
 		<div data-bo-pane="four">
 
-			<h1>one > two > <strong>four</strong></h1>
+			<h1><span data-bo-trigger-pane="one">one</span> > <span data-bo-trigger-pane="two">two</span> > <strong>four</strong></h1>
 
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 			tempor incididunt ut labore et dolore magna aliqua.</p>
 
-			<button data-bo-trigger-pane="two">Back</button>
+			<button class="subtle" data-bo-trigger-pane="two">Back</button>
 
 		</div>
 

@@ -62,10 +62,26 @@ then show first pane
 				pane = new Pane opts
 				@panes[pane.id] = pane
 
+			iterate: (fn) ->
+
+				_.each @panes, fn
+
 			hideAll: ->
 
-				_.each @panes, (pane) ->
+				@iterate (pane) ->
 					pane.right true
+
+			restToLeft: (index) ->
+
+				@iterate (pane) ->
+					if pane.index < index
+						pane.left true
+
+			restToRight: (index) ->
+
+				@iterate (pane) ->
+					if pane.index > index
+						pane.right true
 
 			show: (id) ->
 
@@ -78,17 +94,21 @@ then show first pane
 
 				if oldPane
 
+					index = newPane.index
+
 					# slide left
-					if newPane.index > oldPane.index
+					if index > oldPane.index
 						
 						oldPane.left()
 						newPane.right(true).show()
+						@restToLeft index # so we can skip panes when jumping
 
 					# slide right
 					else
 
 						oldPane.right()
 						newPane.left(true).show()
+						@restToRight index # so we can skip panes when jumping
 
 				# first call, just show this pane
 				else

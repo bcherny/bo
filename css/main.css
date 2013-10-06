@@ -3,24 +3,34 @@ body {
   font: 13px "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 button {
-  background: -webkit-linear-gradient(-90deg, #eee, #ddd);
+  background: -webkit-linear-gradient(-90deg, #62adff, #2a97df);
   border-radius: 3px;
+  color: #fff;
   display: block;
   font-weight: bold;
   margin: 0 auto;
   padding: 20px 60px;
+  text-shadow: 0 1px rgba(0,0,0,0.1);
   -webkit-appearance: none;
 }
 button:active {
-  background: -webkit-linear-gradient(-90deg, #ccc, #ddd);
+  background: -webkit-linear-gradient(-90deg, #3989e0, #2a97df);
   box-shadow: inset 0 5px 5px rgba(0,0,0,0.1);
 }
-button.inline {
-  display: inline-block;
+button.subtle {
+  background: -webkit-linear-gradient(-90deg, #eee, #ddd);
+  color: #000;
+  text-shadow: none;
+}
+button.subtle:active {
+  background: -webkit-linear-gradient(-90deg, #ccc, #ddd);
 }
 h1 {
-  margin: 100px 0 20px;
+  margin: 30px 0 20px;
   text-align: center;
+}
+h1 span[data-bo-trigger-pane] {
+  cursor: default;
 }
 h1 strong {
   border-bottom: 6px solid #000;
@@ -34,13 +44,15 @@ p {
   display: block;
   text-align: center;
 }
+.buttons button {
+  display: inline-block;
+  padding-left: 0;
+  padding-right: 0;
+  width: 25%;
+}
 [data-bo-pane="second"] h1,
 [data-bo-pane="third"] h1 {
   margin-top: 30px;
-}
-[data-bo-pane="second"] button,
-[data-bo-pane="third"] button {
-  margin-bottom: 10px;
 }
 #frame {
   background: #fff;
