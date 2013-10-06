@@ -3,8 +3,8 @@
 	define (require, exports, module) ->
 
 		izzy = require 'izzy'
-		Model = require 'bo.model'
-		_ = require 'bo.util'
+		Model = require 'model'
+		_ = require 'util'
 
 		class View extends Model
 

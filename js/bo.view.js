@@ -6,8 +6,8 @@ var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments)
 define(function(require, exports, module) {
   var Model, View, izzy, _;
   izzy = require('izzy');
-  Model = require('bo.model');
-  _ = require('bo.util');
+  Model = require('model');
+  _ = require('util');
   return View = (function(_super) {
     __extends(View, _super);
 

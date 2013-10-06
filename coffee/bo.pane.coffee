@@ -1,7 +1,7 @@
 define (require, exports, module) ->
 
 	Bo = require 'bo'
-	_ = require 'bo.util'
+	_ = require 'util'
 
 	paneIdCounter = 0
 

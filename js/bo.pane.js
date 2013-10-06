@@ -4,7 +4,7 @@ var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments)
 define(function(require, exports, module) {
   var Bo, makeId, makePane, paneIdCounter, _;
   Bo = require('bo');
-  _ = require('bo.util');
+  _ = require('util');
   paneIdCounter = 0;
   makePane = function(id) {
     var element;

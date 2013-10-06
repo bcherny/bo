@@ -5,13 +5,17 @@ Configure require
 	require.config
 		paths:
 			izzy: '../node_modules/izzy/izzy'
+			model: 'bo.model'
+			util: 'bo.util'
+			pane: 'bo.pane'
+			view: 'bo.view'
 
 	define (require, exports, module) ->
 
-		Model = require 'bo.model'
-		View = require 'bo.view'
-		Pane = require 'bo.pane'
-		_ = require 'bo.util'
+		Model = require 'model'
+		View = require 'view'
+		Pane = require 'pane'
+		_ = require 'util'
 
 		class Bo extends View
 

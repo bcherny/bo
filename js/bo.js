@@ -5,16 +5,20 @@ var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments)
 
 require.config({
   paths: {
-    izzy: '../node_modules/izzy/izzy'
+    izzy: '../node_modules/izzy/izzy',
+    model: 'bo.model',
+    util: 'bo.util',
+    pane: 'bo.pane',
+    view: 'bo.view'
   }
 });
 
 define(function(require, exports, module) {
   var Bo, Model, Pane, View, _, _ref;
-  Model = require('bo.model');
-  View = require('bo.view');
-  Pane = require('bo.pane');
-  _ = require('bo.util');
+  Model = require('model');
+  View = require('view');
+  Pane = require('pane');
+  _ = require('util');
   return Bo = (function(_super) {
     __extends(Bo, _super);
 

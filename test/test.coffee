@@ -1,11 +1,15 @@
 require.config
 	paths:
 		izzy: '../node_modules/izzy/izzy'
+		model: '../js/bo.model'
+		util: '../js/bo.util'
+		view: '../js/bo.view'
 
 define (require, module, exports) ->
 
-	Model = require '../js/bo.model'
-	Util = require '../js/bo.util'
+	Model = require 'model'
+	Util = require 'util'
+	View = require 'view'
 	expect = chai.expect
 
 	mocha.setup 'bdd'
@@ -156,6 +160,17 @@ define (require, module, exports) ->
 				result = Util.one obj
 
 				expect(result).to.equal 'foo'
+
+
+	describe 'Bo.View', ->
+
+		it 'should call initialize()', ->
+
+			spy = sinon.spy()
+			view = new View
+				initialize: -> console.log 'call'
+
+			expect(spy.called).to.equal true
 
 
 	mocha.run()
