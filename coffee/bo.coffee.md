@@ -1,14 +1,8 @@
 # Bo main
 
-Alias `izzy`
-
-	require.config
-		paths:
-			izzy: '../node_modules/izzy/izzy'
-
 Define Bo
 
-	define (require, exports, module) ->
+	define 'bo', ->
 
 		Model = require 'model'
 		View = require 'view'

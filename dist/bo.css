@@ -1,0 +1,6 @@
+*{border:0;margin:0;padding:0;text-rendering:optimizelegibility;user-select:none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-touch-callout:none;-webkit-user-select:none}
+html,body{height:100%;width:100%}
+[data-bo-pane]{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0;-webkit-transform:translate3d(0,0,0);}
+[data-bo-pane].left{-webkit-transform:translate3d(-100%,0,0)}
+[data-bo-pane].right{-webkit-transform:translate3d(100%,0,0)}
+[data-bo-pane].animate{-webkit-transition:-webkit-transform .2s linear}

@@ -1,17 +1,14 @@
 {
   "name": "bomobile",
-  "version": "0.0.0",
-  "description": "a small framework for authoring mobile apps with native-like performance. full unit test coverage.",
-  "main": "js/main.js",
-  "directories": {
-    "test": "test"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "version": "0.1.0",
+  "description": "a small mvc framework for authoring mobile apps with native-like performance. full unit test coverage.",
+  "main": "dist/bo.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/eighttrackmind/bo.git"
+  },
+  "scripts": {
+    "install": "napa timjansen/sparkplug.js"
   },
   "keywords": [
     "mobile",
@@ -29,13 +26,16 @@
     "url": "https://github.com/eighttrackmind/bo/issues"
   },
   "devDependencies": {
-    "sinon": "~1.7.3",
     "chai": "~1.8.0",
     "mocha": "~1.13.0",
-    "requirejs": "~2.1.8",
-    "lodash": "~2.2.1"
+    "grunt": "~0.4.1",
+    "grunt-exec": "~0.4.2",
+    "stylus": "~0.38.0",
+    "grunt-contrib-uglify": "~0.2.4",
+    "grunt-contrib-concat": "~0.3.0"
   },
   "dependencies": {
-    "izzy": "~0.1.1"
+    "izzy": "~0.1.1",
+    "napa": "~0.1.1"
   }
 }
