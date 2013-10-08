@@ -1,6 +1,6 @@
 # bomobile
 
-a small (2.4k gzipped) mvc framework for authoring mobile apps with native-like performance. full unit test coverage.
+a small (2.4k gzipped) mvv framework for authoring mobile apps with native-like performance. full unit test coverage.
 
 ## demo
 
@@ -24,7 +24,7 @@ see https://github.com/eighttrackmind/bo/tree/master/coffee
 
 ## usage
 
-1. Put your pages into a single HTML file. Each pane ("screen") should have a unique `data-bo-pane` attribute. To trigger another pane when clicked/tapped, give the trigger a `data-bo-trigger-pane` attribute.
+Put your pages into a single HTML file. Each pane ("screen") should have a unique `data-bo-pane` attribute. To trigger another pane when clicked/tapped, give the trigger a `data-bo-trigger-pane` attribute.
 
 ```html
 <div data-bo-pane="paneId">
@@ -36,7 +36,7 @@ see https://github.com/eighttrackmind/bo/tree/master/coffee
 </div>
 ```
 
-2. Link to `bo.css` in your `<head>`.
+Link to `bo.css` in your `<head>`.
 
 ```html
 <html>
@@ -50,7 +50,7 @@ see https://github.com/eighttrackmind/bo/tree/master/coffee
 </html>
 ```
 
-3. Link to `bo.js` at the bottom of your `<body>`.
+Link to `bo.js` at the bottom of your `<body>`.
 
 ```html
 <html>
