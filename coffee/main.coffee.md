@@ -1,4 +1,6 @@
-define (require, exports, module) ->
+# Bo demo
 
-	Bo = require 'bo'
-	bo = new Bo
+	define (require, exports, module) ->
+
+		Bo = require 'bo'
+		bo = new Bo

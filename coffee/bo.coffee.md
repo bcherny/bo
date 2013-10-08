@@ -1,14 +1,12 @@
 # Bo main
 
-Configure require
+Alias `izzy`
 
 	require.config
 		paths:
 			izzy: '../node_modules/izzy/izzy'
-			model: 'bo.model'
-			util: 'bo.util'
-			pane: 'bo.pane'
-			view: 'bo.view'
+
+Define Bo
 
 	define (require, exports, module) ->
 
@@ -19,11 +17,15 @@ Configure require
 
 		class Bo extends View
 
+## Options
+
 			options:
 
 				animationDuration: 200
 				paneAttribute: 'data-bo-pane'
 				paneTriggerAttribute: 'data-bo-trigger-pane'
+
+## Events
 
 			events:
 
@@ -49,8 +51,9 @@ then show first pane
 
 				@show _.one @panes
 
-## registerPane
+## Bo.registerPane
 `{String|Number|DOMElement} element`
+Register panes from the DOM
 
 			registerPane: (element) =>
 
