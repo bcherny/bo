@@ -2,72 +2,68 @@
 
 UI panes (one pane = one "screen")
 
-	define 'pane', ->
+	paneIdCounter = 0
 
-		_ = require 'util'
+	makePane = (id) ->
+		element = document.createElement 'div'
+		element.setAttribute 'data-bo-pane', id
+		document.body.appendChild element
+		element
 
-		paneIdCounter = 0
+	makeId = (counter) ->
+		'pane' + counter
 
-		makePane = (id) ->
-			element = document.createElement 'div'
-			element.setAttribute 'data-bo-pane', id
-			document.body.appendChild element
-			element
+	class Pane
 
-		makeId = (counter) ->
-			'pane' + counter
-
-		class Pane
-
-			id: null
-			element: null
+		id: null
+		element: null
 
 ## Pane.options
 
 everything is optional, otherwise uses sensible defaults
 
-			constructor: (@options) ->
+		constructor: (@options) ->
 
-				++paneIdCounter
+			++paneIdCounter
 
-				element = @options.element
-				html = @options.html
-				idAttr = if element then element.getAttribute 'data-bo-pane' else undefined
-				@id = @options.id or idAttr or makeId paneIdCounter
-				@element = element or makePane @id
-				@index = @options.index or paneIdCounter
+			element = @options.element
+			html = @options.html
+			idAttr = if element then element.getAttribute 'data-bo-pane' else undefined
+			@id = @options.id or idAttr or makeId paneIdCounter
+			@element = element or makePane @id
+			@index = @options.index or paneIdCounter
 
-				# set ID
-				@element.setAttribute 'data-bo-pane', @id
+			# set ID
+			@element.setAttribute 'data-bo-pane', @id
 
-				# set HTML?
-				if html
-					@element.innerHTML = html
+			# set HTML?
+			if html
+				@element.innerHTML = html
 
-			clearAnimation: =>
+		clearAnimation: =>
 
-				@element.classList.remove 'animate'
+			@element.classList.remove 'animate'
 
-			animate: (instant) ->
+		animate: (instant) ->
 
-				if not instant
-					@element.classList.add 'animate'
-					setTimeout @clearAnimation, @options.animationDuration
+			if not instant
+				@element.classList.add 'animate'
+				setTimeout @clearAnimation, @options.animationDuration
 
-			left: _.fluent (instant) ->
+		left: _.fluent (instant) ->
 
-				@animate instant
-				@element.classList.remove 'right'
-				@element.classList.add 'left'
+			@animate instant
+			@element.classList.remove 'right'
+			@element.classList.add 'left'
 
-			right: _.fluent (instant) ->
+		right: _.fluent (instant) ->
 
-				@animate instant
-				@element.classList.remove 'left'
-				@element.classList.add 'right'
+			@animate instant
+			@element.classList.remove 'left'
+			@element.classList.add 'right'
 
-			show: _.fluent (instant) ->
+		show: _.fluent (instant) ->
 
-				@animate instant
-				@element.classList.remove 'left'
-				@element.classList.remove 'right'
+			@animate instant
+			@element.classList.remove 'left'
+			@element.classList.remove 'right'

@@ -10,7 +10,7 @@ module.exports = (grunt) ->
 				command: """
 					echo "compiling coffee..."
 					mkdir -p js
-					coffee --join dist/<%= pkg.name %>-<%= pkg.version %>.js --compile coffee/*.coffee.md
+					coffee -bco js coffee
 				"""
 
 			stylus:
@@ -23,11 +23,12 @@ module.exports = (grunt) ->
 
 			dist:
 				src: [
-					'node_modules/sparkplug.js/sparkplug.js'
-					'node_modules/izzy/izzy.js'
-					'dist/<%= pkg.name %>-<%= pkg.version %>.js'
+					'js/util.js'
+					'js/view.js'
+					'js/pane.js'
+					'js/bo.js'
 				]
-				dest: 'dist/<%= pkg.name %>-<%= pkg.version %>.js'
+				dest: 'dist/bo.js'
 
 		uglify:
 
@@ -42,36 +43,22 @@ module.exports = (grunt) ->
 
 			standard:
 				files:
-					'dist/<%= pkg.name %>-<%= pkg.version %>.min.js': [
-						'dist/<%= pkg.name %>-<%= pkg.version %>.js'
+					'dist/bo.min.js': [
+						'dist/bo.js'
 					]
 
-		# requirejs:
-		# 	compile:
-		# 		options:
-		# 			baseUrl: 'js'
-		# 			mainConfigFile: 'require.config.js',
-		# 			include: 'bo.js'
-		# 			out: 'dist/bo.js'
-		# 			paths:
-		# 				izzy: '../node_modules/izzy/izzy'
-		# 			keepBuildDir: true
-		# 			optimize: 'uglify'
-		# 			uglify2:
-		# 				mangle:
-		# 					toplevel: true
-		# 				compress:
-		# 					dead_code: true
-		# 					unused: true
-		# 					join_vars: true
-		# 				comments: false
-		# 			findNestedDependencies: true
-		# 			wrap: true
-
-
+		umd:
+			all:
+				src: 'dist/bo.js'
+				objectToExport: 'Bo'
+				amdModuleId: 'Bo'
+				globalAlias: 'Bo'
+				deps:
+					'default': ['izzy', 'umodel']
 
 	grunt.loadNpmTasks 'grunt-contrib-concat'
 	grunt.loadNpmTasks 'grunt-contrib-uglify'
+	grunt.loadNpmTasks 'grunt-umd'
 	grunt.loadNpmTasks 'grunt-exec'
 
-	grunt.registerTask 'default', ['exec', 'concat', 'uglify']
+	grunt.registerTask 'default', ['exec', 'concat', 'umd', 'uglify']
