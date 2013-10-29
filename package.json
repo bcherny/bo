@@ -1,6 +1,6 @@
 {
   "name": "bomobile",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "a small mvc framework for authoring mobile apps with native-like performance. full unit test coverage.",
   "main": "dist/bo.js",
   "repository": {
@@ -33,7 +33,7 @@
     "grunt-umd": "~1.3.0"
   },
   "dependencies": {
-    "izzy": "~0.1.1",
-    "umodel": "0.0.2"
+    "izzy": "0.1.x",
+    "umodel": "0.0.x"
   }
 }

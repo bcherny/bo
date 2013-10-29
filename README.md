@@ -2,6 +2,8 @@
 
 a small (1.6k gzipped) mvv framework for authoring mobile apps with native-like performance. full unit test coverage.
 
+![screenshot](http://i.imgur.com/BsOUdah.png)
+
 ## demo
 
 http://performancejs.com/bo/demo/
