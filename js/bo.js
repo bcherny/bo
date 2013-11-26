@@ -29,7 +29,7 @@ Bo = (function(_super) {
   Bo.prototype.initialize = function() {
     var panes;
     this.model.set('active', null);
-    panes = document.querySelectorAll('[' + this.options.paneAttribute + ']');
+    panes = document.querySelectorAll("[" + this.options.paneAttribute + "]");
     _.each(panes, this.registerPane);
     this.hideAll();
     this.displayBlock();

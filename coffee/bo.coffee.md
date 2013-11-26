@@ -26,7 +26,7 @@ init model
 
 load panes from DOM
 
-			panes = document.querySelectorAll '[' + @options.paneAttribute + ']'
+			panes = document.querySelectorAll "[#{@options.paneAttribute}]"
 
 initialize panes
 
@@ -34,11 +34,11 @@ initialize panes
 
 hide all panes to start
 
-			@hideAll()
+			do @hideAll
 
 remove display:none
 
-			@displayBlock()
+			do @displayBlock
 
 then show first pane
 			
@@ -152,6 +152,6 @@ Click handler, activates a pane when its trigger is clicked
 
 			if id
 
-				event.preventDefault()
+				do event.preventDefault
 
 				@show id
