@@ -36,9 +36,21 @@ hide all panes to start
 
 			@hideAll()
 
-then show first pane
+remove display:none
 
+			@displayBlock()
+
+then show first pane
+			
 			@show _.one @panes
+
+## Bo.displayBlock
+Overrides `display:none` CSS rule that hides panes initially
+
+		displayBlock: ->
+
+			@iterate (pane) ->
+				pane.style.display = 'block'
 
 ## Bo.registerPane
 `{String|Number|DOMElement} element`

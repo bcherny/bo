@@ -32,7 +32,14 @@ Bo = (function(_super) {
     panes = document.querySelectorAll('[' + this.options.paneAttribute + ']');
     _.each(panes, this.registerPane);
     this.hideAll();
+    this.displayBlock();
     return this.show(_.one(this.panes));
+  };
+
+  Bo.prototype.displayBlock = function() {
+    return this.iterate(function(pane) {
+      return pane.style.display = 'block';
+    });
   };
 
   Bo.prototype.registerPane = function(element) {
