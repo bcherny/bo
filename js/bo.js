@@ -38,7 +38,7 @@ Bo = (function(_super) {
 
   Bo.prototype.displayBlock = function() {
     return this.iterate(function(pane) {
-      return pane.style.display = 'block';
+      return pane.element.style.display = 'block';
     });
   };
 

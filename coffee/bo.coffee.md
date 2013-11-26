@@ -50,7 +50,7 @@ Overrides `display:none` CSS rule that hides panes initially
 		displayBlock: ->
 
 			@iterate (pane) ->
-				pane.style.display = 'block'
+				pane.element.style.display = 'block'
 
 ## Bo.registerPane
 `{String|Number|DOMElement} element`
