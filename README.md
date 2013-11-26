@@ -1,4 +1,4 @@
-# bomobile
+# bo
 
 a small (1.6k gzipped) mvv framework for authoring mobile apps with native-like performance. full unit test coverage.
 
@@ -6,9 +6,9 @@ a small (1.6k gzipped) mvv framework for authoring mobile apps with native-like 
 
 ## demo
 
-http://performancejs.com/bo/demo/
+http://eighttrackmind.github.io/bo/demo/
 
-## functionality
+## what?
 
 - barebones mvv (fully tested)
 - smooth paging and sliding animation

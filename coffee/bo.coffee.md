@@ -26,7 +26,7 @@ init model
 
 load panes from DOM
 
-			panes = document.querySelectorAll '[' + @options.paneAttribute + ']'
+			panes = document.querySelectorAll "[#{@options.paneAttribute}]"
 
 initialize panes
 
@@ -34,11 +34,23 @@ initialize panes
 
 hide all panes to start
 
-			@hideAll()
+			do @hideAll
+
+remove display:none
+
+			do @displayBlock
 
 then show first pane
-
+			
 			@show _.one @panes
+
+## Bo.displayBlock
+Overrides `display:none` CSS rule that hides panes initially
+
+		displayBlock: ->
+
+			@iterate (pane) ->
+				pane.element.style.display = 'block'
 
 ## Bo.registerPane
 `{String|Number|DOMElement} element`
@@ -58,14 +70,24 @@ Register panes from the DOM
 			pane = new Pane opts
 			@panes[pane.id] = pane
 
+## Bo.iterate
+`{Function} fn`
+Generic pane iterator that applies `fn` to every pane
+
 		iterate: (fn) ->
 
 			_.each @panes, fn
+
+## Bo.hideAll
+Hides all panes
 
 		hideAll: ->
 
 			@iterate (pane) ->
 				pane.right true
+
+## Bo.restToLeft
+Lets us navigate >1 layer at a time
 
 		restToLeft: (index) ->
 
@@ -73,11 +95,18 @@ Register panes from the DOM
 				if pane.index < index
 					pane.left true
 
+## Bo.restToRight
+Lets us navigate >1 layer at a time
+
 		restToRight: (index) ->
 
 			@iterate (pane) ->
 				if pane.index > index
 					pane.right true
+
+## Bo.show
+`{Number|String} id`
+Slides in the pane with the given `id`
 
 		show: (id) ->
 
@@ -113,12 +142,16 @@ Register panes from the DOM
 			# register it
 			@model.set 'active', newPane
 
+## Bo.click
+{Event} event
+Click handler, activates a pane when its trigger is clicked
+
 		click: (event) =>
 
 			id = event.target.getAttribute @options.paneTriggerAttribute
 
 			if id
 
-				event.preventDefault()
+				do event.preventDefault
 
 				@show id

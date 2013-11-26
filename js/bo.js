@@ -29,10 +29,17 @@ Bo = (function(_super) {
   Bo.prototype.initialize = function() {
     var panes;
     this.model.set('active', null);
-    panes = document.querySelectorAll('[' + this.options.paneAttribute + ']');
+    panes = document.querySelectorAll("[" + this.options.paneAttribute + "]");
     _.each(panes, this.registerPane);
     this.hideAll();
+    this.displayBlock();
     return this.show(_.one(this.panes));
+  };
+
+  Bo.prototype.displayBlock = function() {
+    return this.iterate(function(pane) {
+      return pane.element.style.display = 'block';
+    });
   };
 
   Bo.prototype.registerPane = function(element) {
