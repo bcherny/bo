@@ -100,11 +100,11 @@ Bo = (function(_super) {
       index = newPane.index;
       if (index > oldPane.index) {
         oldPane.left();
-        newPane.right(true).show();
+        (newPane.right(true)).show();
         this.restToLeft(index);
       } else {
         oldPane.right();
-        newPane.left(true).show();
+        (newPane.left(true)).show();
         this.restToRight(index);
       }
     } else {

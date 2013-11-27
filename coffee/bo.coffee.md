@@ -130,15 +130,15 @@ Slides in the pane with the given `id`
 				# slide left
 				if index > oldPane.index
 					
-					oldPane.left()
-					newPane.right(true).show()
+					do oldPane.left
+					do (newPane.right true).show
 					@restToLeft index # so we can skip panes when jumping
 
 				# slide right
 				else
 
-					oldPane.right()
-					newPane.left(true).show()
+					do oldPane.right
+					do (newPane.left true).show
 					@restToRight index # so we can skip panes when jumping
 
 			# first call, just show this pane
