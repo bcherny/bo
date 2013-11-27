@@ -28,7 +28,7 @@ Bo = (function(_super) {
   Bo.prototype.panes = {};
 
   Bo.prototype.initialize = function() {
-    var panes,
+    var first, panes,
       _this = this;
     this.model.on('set:active', function(key, pane) {
       return _this.options.change.call(_this, pane);
@@ -38,7 +38,10 @@ Bo = (function(_super) {
     _.each(panes, this.register);
     this.hideAll();
     this.displayBlock();
-    return this.show(_.one(this.panes));
+    first = _.one(this.panes);
+    if (first) {
+      return this.show(first);
+    }
   };
 
   Bo.prototype.displayBlock = function() {

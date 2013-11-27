@@ -48,7 +48,9 @@ remove display:none
 
 then show first pane
 			
-			@show _.one @panes
+			first = _.one @panes
+			if first
+				@show first
 
 ## Bo.displayBlock
 Overrides `display:none` CSS rule that hides panes initially
