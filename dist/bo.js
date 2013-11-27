@@ -129,7 +129,6 @@ Pane = (function() {
     counter: 0,
     create: function() {
       var element;
-      console.log('create', this.id, this);
       element = document.createElement('div');
       element.setAttribute('data-bo-pane', this.id());
       document.body.appendChild(element);
@@ -275,11 +274,11 @@ Bo = (function(_super) {
       index = newPane.index;
       if (index > oldPane.index) {
         oldPane.left();
-        newPane.right(true).show();
+        (newPane.right(true)).show();
         this.restToLeft(index);
       } else {
         oldPane.right();
-        newPane.left(true).show();
+        (newPane.left(true)).show();
         this.restToRight(index);
       }
     } else {
