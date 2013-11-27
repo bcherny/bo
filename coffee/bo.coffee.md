@@ -9,6 +9,7 @@
 			animationDuration: 200
 			paneAttribute: 'data-bo-pane'
 			paneTriggerAttribute: 'data-bo-trigger-pane'
+			change: ->
 
 ## Events
 
@@ -19,6 +20,11 @@
 		panes: {}
 
 		initialize: ->
+
+model events
+
+			@model.on 'set:active', (key, pane) =>
+				@options.change.call @, pane.element
 
 init model
 

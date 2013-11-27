@@ -17,7 +17,8 @@ Bo = (function(_super) {
   Bo.prototype.options = {
     animationDuration: 200,
     paneAttribute: 'data-bo-pane',
-    paneTriggerAttribute: 'data-bo-trigger-pane'
+    paneTriggerAttribute: 'data-bo-trigger-pane',
+    change: function() {}
   };
 
   Bo.prototype.events = {
@@ -27,7 +28,11 @@ Bo = (function(_super) {
   Bo.prototype.panes = {};
 
   Bo.prototype.initialize = function() {
-    var panes;
+    var panes,
+      _this = this;
+    this.model.on('set:active', function(key, pane) {
+      return _this.options.change.call(_this, pane.element);
+    });
     this.model.set('active', null);
     panes = document.querySelectorAll("[" + this.options.paneAttribute + "]");
     _.each(panes, this.registerPane);
