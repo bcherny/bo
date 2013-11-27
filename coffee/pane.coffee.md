@@ -36,8 +36,6 @@ everything is optional, otherwise uses sensible defaults
 
 			create: ->
 
-				console.log 'create', @id, @
-
 				element = document.createElement 'div'
 				element.setAttribute 'data-bo-pane', do @id
 				document.body.appendChild element

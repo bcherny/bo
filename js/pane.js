@@ -28,7 +28,6 @@ Pane = (function() {
     counter: 0,
     create: function() {
       var element;
-      console.log('create', this.id, this);
       element = document.createElement('div');
       element.setAttribute('data-bo-pane', this.id());
       document.body.appendChild(element);
