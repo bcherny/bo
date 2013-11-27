@@ -32,7 +32,9 @@ Bo = (function(_super) {
       _this = this;
     _.extend(this.options, options);
     this.model.on('set:active', function(key, pane) {
-      return _this.options.change.call(_this, pane);
+      if (pane) {
+        return _this.options.change.call(_this, pane);
+      }
     });
     this.model.set('active', null);
     panes = document.querySelectorAll("[" + this.options.paneAttribute + "]");

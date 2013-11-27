@@ -30,7 +30,8 @@ set options
 model events
 
 			@model.on 'set:active', (key, pane) =>
-				@options.change.call @, pane
+				if pane
+					@options.change.call @, pane
 
 init model
 
