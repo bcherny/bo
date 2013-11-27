@@ -69,9 +69,9 @@ bo = new Bo
 | Method		| Arguments					| Description  							| Example						|
 |---------------|---------------------------|---------------------------------------|-------------------------------|
 | `on`			| `"event1...", handler`	| Attach a DOM event listener			| `bo.on "mousedown touchstart", (event) -> ... ` |
-| `register`	| `DOMElement`				| Register a DOM Element as a Bo pane	| `bo.register document.querySelector '#id' |
+| `register`	| `DOMElement`				| Register a DOM Element as a Bo pane	| `bo.register document.querySelector "#id"` |
 | `hideAll`		| -							| Hide all Bo panes						| `do bo.hideAll`				|
-| `show`		| `id`						| Show pane with the given ID			| `bo.show "myPaneId"`			|
+| `show`		| `"id"`					| Show pane with the given ID			| `bo.show "myPaneId"`			|
 
 ## building it yourself
 
