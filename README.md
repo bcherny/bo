@@ -73,6 +73,19 @@ bo = new Bo
 | `hideAll`		| -							| Hide all Bo panes						| `do bo.hideAll`				|
 | `show`		| `"id"`					| Show pane with the given ID			| `bo.show "myPaneId"`			|
 
+## options
+
+```coffee
+# create a new Bo instance, passing in a custom options dictionary
+new Bo options
+```
+
+| Option				| Type		| Default				| Description											|
+|-----------------------|-----------|-----------------------|-------------------------------------------------------|
+| `animationDuration`	| Number	| 200					| Animation duration (ms), be sure to update in `bo.styl` as well |
+| `paneAttribute`		| String	| `"bo-pane"`			| Attribute indicating that an element is a Bo pane		|		| `paneTriggerAttribute`| String	| `"bo-trigger"`		| Attribute indicating that an element should trigger a bo pane |
+| `change`				| Function	| `(PaneInstance) ->`	| Callback fired when a Bo pane is shown				|
+
 ## building it yourself
 
 ```bash
