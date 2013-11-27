@@ -7,8 +7,9 @@
 		options:
 
 			animationDuration: 200
-			paneAttribute: 'data-bo-pane'
-			paneTriggerAttribute: 'data-bo-trigger-pane'
+			paneAttribute: 'bo-pane'
+			paneTriggerAttribute: 'bo-trigger'
+			change: ->
 
 ## Events
 
@@ -20,6 +21,11 @@
 
 		initialize: ->
 
+model events
+
+			@model.on 'set:active', (key, pane) =>
+				@options.change.call @, pane
+
 init model
 
 			@model.set 'active', null
@@ -30,7 +36,7 @@ load panes from DOM
 
 initialize panes
 
-			_.each panes, @registerPane
+			_.each panes, @register
 
 hide all panes to start
 
@@ -52,11 +58,11 @@ Overrides `display:none` CSS rule that hides panes initially
 			@iterate (pane) ->
 				pane.element.style.display = 'block'
 
-## Bo.registerPane
+## Bo.register
 `{String|Number|DOMElement} element`
 Register panes from the DOM
 
-		registerPane: (element) =>
+		register: (element) =>
 
 			if typeof element is 'String' or typeof element is 'Number'
 				opts =
@@ -124,15 +130,15 @@ Slides in the pane with the given `id`
 				# slide left
 				if index > oldPane.index
 					
-					oldPane.left()
-					newPane.right(true).show()
+					do oldPane.left
+					do (newPane.right true).show
 					@restToLeft index # so we can skip panes when jumping
 
 				# slide right
 				else
 
-					oldPane.right()
-					newPane.left(true).show()
+					do oldPane.right
+					do (newPane.left true).show
 					@restToRight index # so we can skip panes when jumping
 
 			# first call, just show this pane

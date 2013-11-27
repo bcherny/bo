@@ -13,17 +13,17 @@ View = (function() {
   function View() {
     var args, element;
     element = arguments[0], args = 2 <= arguments.length ? __slice.call(arguments, 1) : [];
-    this.attachEvent = __bind(this.attachEvent, this);
+    this.on = __bind(this.on, this);
     this.element = element || document;
     if (izzy.object(this.events)) {
-      _.each(this.events, this.attachEvent);
+      _.each(this.events, this.on);
     }
     if (izzy["function"](this.initialize)) {
       this.initialize.apply(this, args);
     }
   }
 
-  View.prototype.attachEvent = function(fn, type) {
+  View.prototype.on = function(fn, type) {
     var t, types, _i, _len, _results;
     types = type.split(' ');
     _results = [];

@@ -1,6 +1,6 @@
 {
   "name": "bomobile",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "a small mvc framework for authoring mobile apps with native-like performance. full unit test coverage.",
   "main": "dist/bo.js",
   "repository": {
@@ -11,6 +11,7 @@
     "mobile",
     "ios",
     "cordova",
+    "phonegap",
     "wrap",
     "slide",
     "paging",

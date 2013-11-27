@@ -9,15 +9,16 @@ Bo = (function(_super) {
 
   function Bo() {
     this.click = __bind(this.click, this);
-    this.registerPane = __bind(this.registerPane, this);
+    this.register = __bind(this.register, this);
     _ref = Bo.__super__.constructor.apply(this, arguments);
     return _ref;
   }
 
   Bo.prototype.options = {
     animationDuration: 200,
-    paneAttribute: 'data-bo-pane',
-    paneTriggerAttribute: 'data-bo-trigger-pane'
+    paneAttribute: 'bo-pane',
+    paneTriggerAttribute: 'bo-trigger',
+    change: function() {}
   };
 
   Bo.prototype.events = {
@@ -27,10 +28,14 @@ Bo = (function(_super) {
   Bo.prototype.panes = {};
 
   Bo.prototype.initialize = function() {
-    var panes;
+    var panes,
+      _this = this;
+    this.model.on('set:active', function(key, pane) {
+      return _this.options.change.call(_this, pane);
+    });
     this.model.set('active', null);
     panes = document.querySelectorAll("[" + this.options.paneAttribute + "]");
-    _.each(panes, this.registerPane);
+    _.each(panes, this.register);
     this.hideAll();
     this.displayBlock();
     return this.show(_.one(this.panes));
@@ -42,7 +47,7 @@ Bo = (function(_super) {
     });
   };
 
-  Bo.prototype.registerPane = function(element) {
+  Bo.prototype.register = function(element) {
     var opts, pane;
     if (typeof element === 'String' || typeof element === 'Number') {
       opts = {
@@ -95,11 +100,11 @@ Bo = (function(_super) {
       index = newPane.index;
       if (index > oldPane.index) {
         oldPane.left();
-        newPane.right(true).show();
+        (newPane.right(true)).show();
         this.restToLeft(index);
       } else {
         oldPane.right();
-        newPane.left(true).show();
+        (newPane.left(true)).show();
         this.restToRight(index);
       }
     } else {
