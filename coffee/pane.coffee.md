@@ -2,17 +2,6 @@
 
 UI panes (one pane = one "screen")
 
-	paneIdCounter = 0
-
-	makePane = (id) ->
-		element = document.createElement 'div'
-		element.setAttribute 'data-bo-pane', id
-		document.body.appendChild element
-		element
-
-	makeId = (counter) ->
-		'pane' + counter
-
 	class Pane
 
 		id: null
@@ -24,23 +13,39 @@ everything is optional, otherwise uses sensible defaults
 
 		constructor: (@options) ->
 
-			console.log 'options', @options
-
-			++paneIdCounter
+			++@factory.counter
 
 			element = @options.element
 			html = @options.html
-			idAttr = if element then element.getAttribute 'data-bo-pane' else undefined
-			@id = @options.id or idAttr or makeId paneIdCounter
-			@element = element or makePane @id
-			@index = @options.index or paneIdCounter
+			idAttr = if element then element.getAttribute @options.paneAttribute else undefined
+
+			@id = @options.id or idAttr or do @factory.id
+			@element = element or do @factory.create
+			@index = @options.index or @factory.counter
 
 			# set ID
-			@element.setAttribute 'data-bo-pane', @id
+			@element.setAttribute @options.paneAttribute, @id
 
 			# set HTML?
 			if html
 				@element.innerHTML = html
+
+		factory:
+
+			counter: 0
+
+			create: ->
+
+				console.log 'create', @id, @
+
+				element = document.createElement 'div'
+				element.setAttribute 'data-bo-pane', do @id
+				document.body.appendChild element
+				element
+
+			id: ->
+
+				"pane-#{@counter}"
 
 		clearAnimation: =>
 
