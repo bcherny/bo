@@ -25,6 +25,7 @@ Pane = (function() {
     var element, html, idAttr;
     this.options = options;
     this.clearAnimation = __bind(this.clearAnimation, this);
+    console.log('options', this.options);
     ++paneIdCounter;
     element = this.options.element;
     html = this.options.html;

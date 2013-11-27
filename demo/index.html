@@ -15,48 +15,48 @@
 
 	<div id="frame">
 
-		<div data-bo-pane="one">
+		<div bo-pane="one">
 
 			<h1>Hello world!</h1>
 
-			<button data-bo-trigger-pane="two">Next</button>
+			<button bo-trigger="two">Next</button>
 			
 		</div>
 
-		<div data-bo-pane="two">
+		<div bo-pane="two">
 
-			<h1><span data-bo-trigger-pane="one">one</span> > <strong>two</strong></h1>
+			<h1><span bo-trigger="one">one</span> > <strong>two</strong></h1>
 
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 			tempor incididunt ut labore et dolore magna aliqua.</p>
 
 			<span class="buttons">
-				<button class="subtle" data-bo-trigger-pane="one">Back</button>
-				<button data-bo-trigger-pane="three">Another</button>
-				<button data-bo-trigger-pane="four">Or this one</button>
+				<button class="subtle" bo-trigger="one">Back</button>
+				<button bo-trigger="three">Another</button>
+				<button bo-trigger="four">Or this one</button>
 			</span>
 
 		</div>
 
-		<div data-bo-pane="three">
+		<div bo-pane="three">
 
-			<h1><span data-bo-trigger-pane="one">one</span> > <span data-bo-trigger-pane="two">two</span> > <strong>three</strong></h1>
+			<h1><span bo-trigger="one">one</span> > <span bo-trigger="two">two</span> > <strong>three</strong></h1>
 
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 			tempor incididunt ut labore et dolore magna aliqua.</p>
 
-			<button class="subtle" data-bo-trigger-pane="two">Back</button>
+			<button class="subtle" bo-trigger="two">Back</button>
 
 		</div>
 
-		<div data-bo-pane="four">
+		<div bo-pane="four">
 
-			<h1><span data-bo-trigger-pane="one">one</span> > <span data-bo-trigger-pane="two">two</span> > <strong>four</strong></h1>
+			<h1><span bo-trigger="one">one</span> > <span bo-trigger="two">two</span> > <strong>four</strong></h1>
 
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 			tempor incididunt ut labore et dolore magna aliqua.</p>
 
-			<button class="subtle" data-bo-trigger-pane="two">Back</button>
+			<button class="subtle" bo-trigger="two">Back</button>
 
 		</div>
 

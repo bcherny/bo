@@ -17,8 +17,8 @@ http://eighttrackmind.github.io/bo/demo/
 
 ### html
 
-- `<div data-bo-pane="foo">...</div>` - set a pane's ID to `foo` (works with any tag, not just `div`)
-- `<a data-bo-trigger-pane="foo">...</div>` - slide to the pane with ID `foo` when clicked/tapped (works with any tag, not just `a`)
+- `<div bo-pane="foo">...</div>` - set a pane's ID to `foo` (works with any tag, not just `div`)
+- `<a bo-trigger="foo">...</div>` - slide to the pane with ID `foo` when clicked/tapped (works with any tag, not just `a`)
 
 ### coffee (or js if you prefer)
 
@@ -29,8 +29,8 @@ see https://github.com/eighttrackmind/bo/tree/master/coffee
 Put your pages into a single HTML file. Each pane ("screen") should have a unique `data-bo-pane` attribute. To trigger another pane when clicked/tapped, give the trigger a `data-bo-trigger-pane` attribute.
 
 ```html
-<div data-bo-pane="paneId">
-	<button data-bo-trigger-pane="anotherPaneId">Next</button>
+<div bo-pane="paneId">
+	<button bo-trigger="anotherPaneId">Next</button>
 </div>
 ```
 

@@ -7,8 +7,8 @@
 		options:
 
 			animationDuration: 200
-			paneAttribute: 'data-bo-pane'
-			paneTriggerAttribute: 'data-bo-trigger-pane'
+			paneAttribute: 'bo-pane'
+			paneTriggerAttribute: 'bo-trigger'
 			change: ->
 
 ## Events

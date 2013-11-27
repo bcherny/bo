@@ -24,6 +24,8 @@ everything is optional, otherwise uses sensible defaults
 
 		constructor: (@options) ->
 
+			console.log 'options', @options
+
 			++paneIdCounter
 
 			element = @options.element

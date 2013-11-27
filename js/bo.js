@@ -16,8 +16,8 @@ Bo = (function(_super) {
 
   Bo.prototype.options = {
     animationDuration: 200,
-    paneAttribute: 'data-bo-pane',
-    paneTriggerAttribute: 'data-bo-trigger-pane',
+    paneAttribute: 'bo-pane',
+    paneTriggerAttribute: 'bo-trigger',
     change: function() {}
   };
 
