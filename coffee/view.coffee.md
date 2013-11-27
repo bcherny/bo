@@ -33,14 +33,17 @@ element
 events
 
 			if izzy.object @events
-				_.each @events, @attachEvent
+				_.each @events, @on
 
 go for it
 
 			if izzy.function @initialize
 				@initialize.apply @, args
 
-		attachEvent: (fn, type) =>
+### on
+attach event listeners
+
+		on: (fn, type) =>
 
 			types = type.split ' '
 

@@ -13,7 +13,7 @@ http://eighttrackmind.github.io/bo/demo/
 - barebones mvv (fully tested)
 - smooth paging and sliding animation
 
-## api
+## usage
 
 ### html
 
@@ -30,64 +30,47 @@ Put your pages into a single HTML file. Each pane ("screen") should have a uniqu
 
 ```html
 <div data-bo-pane="paneId">
-	<h1>Hello world!</h1>
-
-	...
-
 	<button data-bo-trigger-pane="anotherPaneId">Next</button>
 </div>
 ```
 
-Link to `bo.css` in your `<head>`.
+Link to `bo.css` in your `<head>`:
 
 ```html
-<html>
+...
 <head>
-	...
 	<link rel="stylesheet" href="bo.css" />
-</head>
-<body>
-	...
-</body>
-</html>
+...
 ```
 
-Install and link to dependencies at the bottom of your `<body>`.
+Then install dependencies:
 
 ```bash
 npm install
 ```
 
-```html
-<html>
-<head>
-	...
-	<link rel="stylesheet" href="bo.css" />
-</head>
-<body>
-	...
-	<script src="node_modules/izzy/izzy.js"></script>
-	<script src="node_modules/umodel/umodel.js"></script>
-</body>
-</html>
-```
-
-Link to `bo.js` at the bottom of your `<body>`, after the dependencies.
+Finally, link to dependencies followed by `bo.js` at the bottom of your `<body>`:
 
 ```html
-<html>
-<head>
-	...
-	<link rel="stylesheet" href="bo.css" />
-</head>
-<body>
 	...
 	<script src="node_modules/izzy/izzy.js"></script>
 	<script src="node_modules/umodel/umodel.js"></script>
 	<script src="bo.js"></script>
 </body>
-</html>
 ```
+
+## api
+
+```coffee
+# create a new Bo instance
+bo = new Bo
+```
+
+| Method		| Arguments					| Description  							| Example						|
+|---------------|---------------------------|---------------------------------------|-------------------------------|
+| `on`			| `"event1...", handler`	| Attach a DOM event listener			| `bo.on "mousedown touchstart", (event) -> ... ` |
+| `register`	| `DOMElement`				| Register a DOM Element as a Bo pane	| `bo.register document.querySelector '#id' |
+| 
 
 ## building it yourself
 

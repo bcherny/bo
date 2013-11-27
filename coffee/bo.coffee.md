@@ -24,7 +24,7 @@
 model events
 
 			@model.on 'set:active', (key, pane) =>
-				@options.change.call @, pane.element
+				@options.change.call @, pane
 
 init model
 
@@ -36,7 +36,7 @@ load panes from DOM
 
 initialize panes
 
-			_.each panes, @registerPane
+			_.each panes, @register
 
 hide all panes to start
 
@@ -58,11 +58,11 @@ Overrides `display:none` CSS rule that hides panes initially
 			@iterate (pane) ->
 				pane.element.style.display = 'block'
 
-## Bo.registerPane
+## Bo.register
 `{String|Number|DOMElement} element`
 Register panes from the DOM
 
-		registerPane: (element) =>
+		register: (element) =>
 
 			if typeof element is 'String' or typeof element is 'Number'
 				opts =
