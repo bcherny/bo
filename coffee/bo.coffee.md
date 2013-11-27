@@ -19,7 +19,13 @@
 
 		panes: {}
 
-		initialize: ->
+## Initialize
+
+		initialize: (options) ->
+
+set options
+			
+			_.extend @options, options
 
 model events
 

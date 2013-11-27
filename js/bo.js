@@ -27,9 +27,10 @@ Bo = (function(_super) {
 
   Bo.prototype.panes = {};
 
-  Bo.prototype.initialize = function() {
+  Bo.prototype.initialize = function(options) {
     var first, panes,
       _this = this;
+    _.extend(this.options, options);
     this.model.on('set:active', function(key, pane) {
       return _this.options.change.call(_this, pane);
     });
