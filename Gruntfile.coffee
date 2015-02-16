@@ -16,7 +16,7 @@ module.exports = (grunt) ->
 			stylus:
 				command: """
 					echo "compiling stylus..."
-					stylus stylus stylus --compress --out dist
+					stylus stylus -u autoprefixer-stylus --compress --out dist
 				"""
 
 		concat:
