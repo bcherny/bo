@@ -1,35 +1,53 @@
 $pane-slide-duration = .2s
 $pane-slide-transition = linear
 
-*
-	border 0
-	margin 0
-	padding 0
-	text-rendering optimizelegibility
-	user-select none
-	-webkit-tap-highlight-color rgba(0,0,0,0)
-	-webkit-touch-callout none
-
 html
 body
 	height 100%
 	width 100%
+	
+@keyframes animate-left
+	to
+		transform translate3d(-100%, 0, 0)
+	
+@keyframes animate-center
+	to
+		transform translate3d(0, 0, 0)
+	
+@keyframes animate-right
+	to
+		transform translate3d(100%, 0, 0)
 
 [bo-pane]
 	bottom 0
-	display none
+	display block
 	left 0
 	margin auto
 	position absolute
 	right 0
 	top 0
 	transform translate3d(0, 0, 0)
+	
+	&.animate-left
+		animation animate-left $pane-slide-duration $pane-slide-transition 1
+		animation-fill-mode: forwards
+	
+	&.animate-center
+		animation animate-center $pane-slide-duration $pane-slide-transition 1
+		animation-fill-mode: forwards
+	
+	&.animate-right
+		animation animate-right $pane-slide-duration $pane-slide-transition 1
+		animation-fill-mode: forwards
 
 	&.left
 		transform translate3d(-100%, 0, 0)
 
 	&.right
 		transform translate3d(100%, 0, 0)
-
-	&.animate
-		transition transform $pane-slide-duration $pane-slide-transition
+		
+	&.hidden
+		display none
+		
+	&.center
+		display block

@@ -6,7 +6,6 @@
 
 		options:
 
-			animationDuration: 200
 			paneAttribute: 'bo-pane'
 			paneTriggerAttribute: 'bo-trigger'
 			change: ->
@@ -47,17 +46,17 @@ initialize panes
 
 hide all panes to start
 
-			do @hideAll
+			(do @hideAll).then =>
 
 remove display:none
 
-			do @displayBlock
+				# do @displayBlock
 
 then show first pane
 			
-			first = _.one @panes
-			if first
-				@show first
+				first = _.one @panes
+				if first
+					@show first
 
 ## Bo.displayBlock
 Overrides `display:none` CSS rule that hides panes initially
@@ -65,7 +64,7 @@ Overrides `display:none` CSS rule that hides panes initially
 		displayBlock: ->
 
 			@iterate (pane) ->
-				pane.element.style.display = 'block'
+				# pane.element.style.display = 'block'
 
 ## Bo.register
 `{String|Number|DOMElement} element`
@@ -97,27 +96,12 @@ Generic pane iterator that applies `fn` to every pane
 Hides all panes
 
 		hideAll: ->
-
-			@iterate (pane) ->
-				pane.right true
-
-## Bo.restToLeft
-Lets us navigate >1 layer at a time
-
-		restToLeft: (index) ->
-
-			@iterate (pane) ->
-				if pane.index < index
-					pane.left true
-
-## Bo.restToRight
-Lets us navigate >1 layer at a time
-
-		restToRight: (index) ->
-
-			@iterate (pane) ->
-				if pane.index > index
-					pane.right true
+			Promise.all (
+				Object
+					.keys(@panes)
+					.map((_) => @panes[_])
+					.map (_) -> _.right instant: yes
+			)
 
 ## Bo.show
 `{Number|String} id`
@@ -129,8 +113,8 @@ Slides in the pane with the given `id`
 			newPane = @panes[id]
 			oldPane = @model.get 'active'
 
-			if not newPane
-				throw new Error 'Pane with ID "' + id + '" does not exist in the DOM, or is not registered with Bo.'
+			unless newPane
+				throw new ReferenceError 'Pane with ID "' + id + '" does not exist in the DOM, or is not registered with Bo.'
 
 			if oldPane
 
@@ -139,20 +123,28 @@ Slides in the pane with the given `id`
 				# slide left
 				if index > oldPane.index
 					
-					do oldPane.left
-					do (newPane.right true).show
-					@restToLeft index # so we can skip panes when jumping
+					newPane
+						.right(instant: yes)
+						.then ->
+							Promise.all [
+								do oldPane.left
+								do newPane.show
+							]
 
 				# slide right
 				else
-
-					do oldPane.right
-					do (newPane.left true).show
-					@restToRight index # so we can skip panes when jumping
+					
+					newPane
+						.left(instant: yes)
+						.then ->
+							Promise.all [
+								do oldPane.right
+								do newPane.show
+							]
 
 			# first call, just show this pane
 			else
-				newPane.show true
+				newPane.show instant: yes
 
 			# register it
 			@model.set 'active', newPane

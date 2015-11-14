@@ -49,26 +49,46 @@ everything is optional, otherwise uses sensible defaults
 
 			@element.classList.remove 'animate'
 
-		animate: (instant) ->
+		animate: ({ direction, instant } = { direction: 'left', instant: no }) ->
 
-			if not instant
-				@element.classList.add 'animate'
-				setTimeout @clearAnimation, @options.animationDuration
+			oppositeDirections = ['center', 'left', 'right'].filter (_) -> _ isnt direction
 
-		left: _.fluent (instant) ->
+			new Promise (resolve) =>
 
-			@animate instant
-			@element.classList.remove 'right'
-			@element.classList.add 'left'
+				@element.classList.remove 'hidden'
 
-		right: _.fluent (instant) ->
+				_onEnd = =>
+					@element.removeEventListener _onEnd
+					do _onAfterEnd
+					do resolve
 
-			@animate instant
-			@element.classList.remove 'left'
-			@element.classList.add 'right'
+				_onAfterEnd = =>
+					@element.classList.remove "animate-#{ direction }"
+					oppositeDirections.forEach (_) => @element.classList.remove _
+					@element.classList.add direction
+					@element.classList.add 'hidden'
 
-		show: _.fluent (instant) ->
+				if instant
+					do _onAfterEnd
+					setTimeout(resolve, 0)
+				else
+					@element.classList.add "animate-#{ direction }"
+					@element.addEventListener 'animationend', _onEnd, no
 
-			@animate instant
-			@element.classList.remove 'left'
-			@element.classList.remove 'right'
+		left: ({ instant } = { instant: no }) ->
+
+			@animate
+				direction: 'left'
+				instant: instant
+
+		right: ({ instant } = { instant: no }) ->
+
+			@animate
+				direction: 'right'
+				instant: instant
+
+		show: ({ instant } = { instant: no }) ->
+
+			@animate
+					direction: 'center'
+					instant: instant

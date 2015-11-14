@@ -56,8 +56,16 @@ module.exports = (grunt) ->
 				deps:
 					'default': ['izzy', 'umodel']
 
+		watch:
+			all:
+				files: ['coffee/*', 'stylus/*']
+				tasks: ['default']
+				options:
+					interrupt: yes
+
 	grunt.loadNpmTasks 'grunt-contrib-concat'
 	grunt.loadNpmTasks 'grunt-contrib-uglify'
+	grunt.loadNpmTasks 'grunt-contrib-watch'
 	grunt.loadNpmTasks 'grunt-umd'
 	grunt.loadNpmTasks 'grunt-exec'
 
